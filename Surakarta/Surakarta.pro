@@ -9,14 +9,27 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    MyPaint.cpp \
     main.cpp \
-    widget.cpp
+    widget.cpp \
+    surakarta_game.cpp \
+    surakarta_reason.cpp \
+    surakarta_rule_manager.cpp\
+    surakarta_agent/surakarta_agent_mine.cpp\
+    surakarta_agent/surakarta_agent_random.cpp\
+    surakarta_agent/surakarta_agent_random.h
 
 HEADERS += \
-    MyPaint.h \
-    widget.h
-
+    surakarta_board.h \
+    surakarta_piece.h \
+    widget.h \
+    global_random_generator.h \
+    surakarta_common.h \
+    surakarta_reason.h \
+    surakarta_rule_manager.h \
+    surakarta_game.h\
+    surakarta_agent/surakarta_agent_base.h\
+    surakarta_agent/surakarta_agent_mine.h\
+    surakarta_agent/surakarta_agent_random.h
 FORMS += \
     widget.ui
 
