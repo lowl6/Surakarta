@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    surakarta_board.cpp \
     widget.cpp \
     surakarta_game.cpp \
     surakarta_reason.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     surakarta_agent/surakarta_agent_mine.h\
     surakarta_agent/surakarta_agent_random.h
 FORMS += \
+    surakarta_board.ui \
     widget.ui
 
 # Default rules for deployment.

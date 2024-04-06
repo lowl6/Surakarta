@@ -1,61 +1,39 @@
 #pragma once
-
-#include <memory>
-#include <vector>
+// #include <memory>
+// #include <vector>
+#include <QPainter>
 #include "surakarta_piece.h"
-
+#include <QWidget>
+// #include "ui_widget.h"
 #define BOARD_SIZE 6
 
-class SurakartRow : public std::vector<std::shared_ptr<SurakartaPiece>> {
-public:
-    SurakartRow(unsigned int board_size)
-        : std::vector<std::shared_ptr<SurakartaPiece>>(board_size) {}
-};
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class SurakartaBoard;
+}
+QT_END_NAMESPACE
 
-class SurakartaBoard : public std::vector<SurakartRow> {
+class SurakartaBoard:public QWidget
+{
+    Q_OBJECT
 public:
-    unsigned int board_size_;
-    SurakartaBoard(unsigned int board_size)
-        : board_size_(board_size) {
-        for (unsigned int i = 0; i < board_size_; i++) {
-            this->push_back(SurakartRow(board_size_));
-        }
-    }
-
+    SurakartaBoard(QWidget *parent = nullptr);
+    ~SurakartaBoard(){};
+    int cell_width=50;             //格子宽度
+    int  piece_radius=cell_width/2;// r棋子的半径,格子一半的宽度
+    int _selectid;              // 被选中的棋子
+    bool isBlackTurn;              // 是否轮到黑方走
+    SurakartaPiece piece[24];
+    void initBoard();
+    inline QPoint center(unsigned int row,unsigned int col);//输入行列坐标 返回像素坐标
+    inline QPoint center(int id);  // //输入棋子的id 返回像素坐标
+    void drawPiece(QPainter & painter, int id);
+    void paintEvent(QPaintEvent *); //与显示到窗口中有关的函数
     bool IsInside(const SurakartaPosition& position) const {
-        return position.x < board_size_ && position.y < board_size_;
+        return position.x < BOARD_SIZE && position.y < BOARD_SIZE;
     }
 
-    friend inline std::ostream& operator<<(std::ostream& os, const SurakartaBoard& board) {
-        for (unsigned int y = 0; y < board.board_size_; y++) {
-            for (unsigned int x = 0; x < board.board_size_; x++) {
-                os << (*board[x][y]) << " ";
-            }
-            os << std::endl;
-        }
-        return os;
-    }
-
-    friend inline std::istream& operator>>(std::istream& is, SurakartaBoard& board) {
-        for (unsigned int y = 0; y < board.board_size_; y++) {
-            for (unsigned int x = 0; x < board.board_size_; x++) {
-                char ch;
-                is >> ch;
-                PieceColor color;
-                switch (ch) {
-                case 'B':
-                    color = PieceColor::BLACK;
-                    break;
-                case 'W':
-                    color = PieceColor::WHITE;
-                    break;
-                default:
-                    color = PieceColor::NONE;
-                    break;
-                }
-                board[x][y] = std::make_shared<SurakartaPiece>(x, y, color);
-            }
-        }
-        return is;
-    }
+private:
+    // Ui::SurakartaBoard *ui;
 };
+

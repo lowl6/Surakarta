@@ -2,7 +2,7 @@
 #define SURAKARTA_PIECE_H
 
 #include <iostream>
-
+#include <QWidget>
 using PieceColorMemoryType = int;
 enum class PieceColor : PieceColorMemoryType { BLACK,
                                                WHITE,
@@ -107,4 +107,6 @@ public:
     SurakartaPosition position_;
     PieceColor color_;
 };
+
+
 #endif // SURAKARTA_PIECE_H

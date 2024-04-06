@@ -1,8 +1,8 @@
-#include <memory>
-#include "surakarta_agent_base.h"
+// // #include <memory>
+// #include "surakarta_agent_base.h"
 
-class SurakartaAgentRandom : public SurakartaAgentBase {
-   public:
-    using SurakartaAgentBase::SurakartaAgentBase;
-    SurakartaMove CalculateMove() override;
-};
+// class SurakartaAgentRandom : public SurakartaAgentBase {
+//    public:
+//     using SurakartaAgentBase::SurakartaAgentBase;
+//     SurakartaMove CalculateMove() override;
+// };
