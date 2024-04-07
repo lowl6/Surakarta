@@ -16,8 +16,6 @@ SOURCES += \
     surakarta_reason.cpp \
     surakarta_rule_manager.cpp\
     surakarta_agent/surakarta_agent_mine.cpp\
-    surakarta_agent/surakarta_agent_random.cpp\
-    surakarta_agent/surakarta_agent_random.h
 
 HEADERS += \
     surakarta_board.h \
@@ -30,7 +28,6 @@ HEADERS += \
     surakarta_game.h\
     surakarta_agent/surakarta_agent_base.h\
     surakarta_agent/surakarta_agent_mine.h\
-    surakarta_agent/surakarta_agent_random.h
 FORMS += \
     surakarta_board.ui \
     widget.ui
