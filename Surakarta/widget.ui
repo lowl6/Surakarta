@@ -13,31 +13,31 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <widget class="QPushButton" name="BeginGame">
+  <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>310</y>
-     <width>131</width>
-     <height>36</height>
+     <x>650</x>
+     <y>510</y>
+     <width>92</width>
+     <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>开始游戏</string>
+    <string>退出游戏</string>
    </property>
   </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>BeginGame</sender>
+   <sender>pushButton</sender>
    <signal>clicked()</signal>
    <receiver>Widget</receiver>
-   <slot>showFullScreen()</slot>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>375</x>
-     <y>327</y>
+     <x>695</x>
+     <y>523</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>

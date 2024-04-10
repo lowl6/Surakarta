@@ -1,0 +1,10 @@
+debug/main.o
+debug/showboard.o
+debug/surakarta_board.o
+debug/widget.o
+debug/surakarta_game.o
+debug/surakarta_reason.o
+debug/surakarta_rule_manager.o
+debug/surakarta_agent_mine.o
+debug/moc_showboard.o
+debug/moc_widget.o

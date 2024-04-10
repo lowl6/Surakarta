@@ -28,11 +28,11 @@ HEADERS += \
     surakarta_game.h\
     surakarta_agent/surakarta_agent_base.h\
     surakarta_agent/surakarta_agent_mine.h\
-FORMS += \
-    surakarta_board.ui \
-    widget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+FORMS += \
+     widget.ui

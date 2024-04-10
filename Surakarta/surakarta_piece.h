@@ -1,8 +1,5 @@
 #ifndef SURAKARTA_PIECE_H
 #define SURAKARTA_PIECE_H
-
-#include <iostream>
-#include <QWidget>
 using PieceColorMemoryType = int;
 enum class PieceColor : PieceColorMemoryType { BLACK,
                                                WHITE,
@@ -23,53 +20,53 @@ inline PieceColor ReverseColor(PieceColor color) {
     }
 }//用于吃子
 
-inline std::ostream& operator<<(std::ostream& os, const PieceColor& color) {
-    switch (color) {
-    case PieceColor::NONE:
-        os << ".";
-        break;
-    case PieceColor::BLACK:
-        os << "B";
-        break;
-    case PieceColor::WHITE:
-        os << "W";
-        break;
-    default:
-        os << "?";
-        break;
-    }
-    return os;
-}
+// inline std::ostream& operator<<(std::ostream& os, const PieceColor& color) {
+//     switch (color) {
+//     case PieceColor::NONE:
+//         os << ".";
+//         break;
+//     case PieceColor::BLACK:
+//         os << "B";
+//         break;
+//     case PieceColor::WHITE:
+//         os << "W";
+//         break;
+//     default:
+//         os << "?";
+//         break;
+//     }
+//     return os;
+// }
 
-inline std::istream& operator>>(std::istream& is, PieceColor& color) {
-    char ch;
-    is >> ch;
-    switch (ch) {
-    case '.':
-        color = PieceColor::NONE;
-        break;
-    case 'B':
-        color = PieceColor::BLACK;
-        break;
-    case 'W':
-        color = PieceColor::WHITE;
-        break;
-    default:
-        color = PieceColor::UNKNOWN;
-        break;
-    }
-    return is;
-}
+// inline std::istream& operator>>(std::istream& is, PieceColor& color) {
+//     char ch;
+//     is >> ch;
+//     switch (ch) {
+//     case '.':
+//         color = PieceColor::NONE;
+//         break;
+//     case 'B':
+//         color = PieceColor::BLACK;
+//         break;
+//     case 'W':
+//         color = PieceColor::WHITE;
+//         break;
+//     default:
+//         color = PieceColor::UNKNOWN;
+//         break;
+//     }
+//     return is;
+// }
 
 struct SurakartaPosition {
     unsigned int x;
     unsigned int y;
     SurakartaPosition(unsigned int x = 0, unsigned int y = 0)
         : x(x), y(y) {}
-    friend std::ostream& operator<<(std::ostream& os, const SurakartaPosition& pos) {
-        os << "(" << pos.x << ", " << pos.y << ")";
-        return os;
-    }
+    // friend std::ostream& operator<<(std::ostream& os, const SurakartaPosition& pos) {
+    //     os << "(" << pos.x << ", " << pos.y << ")";
+    //     return os;
+    // }
     bool operator==(const SurakartaPosition& rhs) const {
         return x == rhs.x && y == rhs.y;
     }
@@ -98,10 +95,10 @@ public:
     SurakartaPosition GetPosition() const { return position_; }
     PieceColor GetColor() const { return color_; }
 
-    friend std::ostream& operator<<(std::ostream& os, const SurakartaPiece& piece) {
-        os << piece.color_;
-        return os;
-    }
+    // friend std::ostream& operator<<(std::ostream& os, const SurakartaPiece& piece) {
+    //     os << piece.color_;
+    //     return os;
+    // }
 
     //    private:
     SurakartaPosition position_;
