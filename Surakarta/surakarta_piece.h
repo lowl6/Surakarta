@@ -1,5 +1,6 @@
 #ifndef SURAKARTA_PIECE_H
 #define SURAKARTA_PIECE_H
+#include <iostream>
 using PieceColorMemoryType = int;
 enum class PieceColor : PieceColorMemoryType { BLACK,
                                                WHITE,
@@ -20,23 +21,23 @@ inline PieceColor ReverseColor(PieceColor color) {
     }
 }//用于吃子
 
-// inline std::ostream& operator<<(std::ostream& os, const PieceColor& color) {
-//     switch (color) {
-//     case PieceColor::NONE:
-//         os << ".";
-//         break;
-//     case PieceColor::BLACK:
-//         os << "B";
-//         break;
-//     case PieceColor::WHITE:
-//         os << "W";
-//         break;
-//     default:
-//         os << "?";
-//         break;
-//     }
-//     return os;
-// }
+inline std::ostream& operator<<(std::ostream& os, const PieceColor& color) {
+    switch (color) {
+    case PieceColor::NONE:
+        os << "NONE";
+        break;
+    case PieceColor::BLACK:
+        os << "BLACK";
+        break;
+    case PieceColor::WHITE:
+        os << "WHITE";
+        break;
+    default:
+        os << "???";
+        break;
+    }
+    return os;
+}
 
 // inline std::istream& operator>>(std::istream& is, PieceColor& color) {
 //     char ch;
@@ -63,10 +64,10 @@ struct SurakartaPosition {
     unsigned int y;
     SurakartaPosition(unsigned int x = 0, unsigned int y = 0)
         : x(x), y(y) {}
-    // friend std::ostream& operator<<(std::ostream& os, const SurakartaPosition& pos) {
-    //     os << "(" << pos.x << ", " << pos.y << ")";
-    //     return os;
-    // }
+    friend std::ostream& operator<<(std::ostream& os, const SurakartaPosition& pos) {
+        os << "(" << pos.x << ", " << pos.y << ")";
+        return os;
+    }
     bool operator==(const SurakartaPosition& rhs) const {
         return x == rhs.x && y == rhs.y;
     }

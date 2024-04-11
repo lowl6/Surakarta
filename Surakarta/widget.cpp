@@ -1,6 +1,5 @@
 #include "widget.h"
 #include "ui_widget.h"
-#include <iostream>
 Widget::Widget(QWidget *parent)
     : QWidget(parent),
    game(std::make_shared<SurakartaGame>(BOARD_SIZE,40)) , ui(new Ui::Widget)
@@ -24,6 +23,7 @@ inline QPoint Widget::center(int id)
 {
     return center( board->piece[id].position_.x,board->piece[id].position_.y);
 }
+
 
 bool Widget::getRowCol(QPoint pt,int&row,int&col)
 {
@@ -79,12 +79,10 @@ void Widget::mouseReleaseEvent(QMouseEvent*ev)
         toSelectPieces(id);
     } else {
         SurakartaPosition from(board->piece[board->selectId].position_.x,board->piece[board->selectId].position_.y);
-        SurakartaPosition to(board->piece[id].position_.x,board->piece[id].position_.y);
-        std::cout<<id;
+        SurakartaPosition to(row,col);
         SurakartaMove move(from,to,game->game_info_->current_player_);
         game->Move(move);
         board->selectId = -1;
-        board->isBlackTurn = !board->isBlackTurn;
         update();
     }
 }

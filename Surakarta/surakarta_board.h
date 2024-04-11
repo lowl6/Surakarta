@@ -26,7 +26,7 @@ public:
     bool isBlackTurn;              // 是否轮到黑方走
     SurakartaPiece piece[24];
     int getPiecesID(unsigned int row,unsigned int col) const;
-
+    PieceColor xy2PositionColor(unsigned int x,unsigned int y) const;
     bool IsInside(const SurakartaPosition& position) const {
         return position.x < BOARD_SIZE && position.y < BOARD_SIZE;
     }

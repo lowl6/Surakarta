@@ -30,6 +30,17 @@ int SurakartaBoard::getPiecesID(unsigned int row, unsigned int col) const
     return -1;
 }
 
+PieceColor SurakartaBoard::xy2PositionColor(unsigned int x, unsigned int y) const
+{
+    for(auto i:piece)
+    {
+        if(i.position_.x==x&&i.position_.y==y)
+            return i.color_;
+
+    }
+    return PieceColor::NONE;
+}
+
 
 
 

@@ -9,24 +9,29 @@ void SurakartaRuleManager::OnUpdateBoard() {
 SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& move) {
     // TODO: Implement this function.
     // OUT_OF_BOARD:1
-    if (move.player != game_info_->current_player_) {
-        return SurakartaIllegalMoveReason::NOT_PLAYER_TURN;
-    }
-    if (move.from.x >= BOARD_SIZE || move.from.y >= BOARD_SIZE || move.to.x >= BOARD_SIZE || move.to.y >= BOARD_SIZE)
-        return SurakartaIllegalMoveReason::OUT_OF_BOARD;
-    std::vector<SurakartaPosition> loopin, loopout, loopboth;
-    int move_fromID=(*board_).getPiecesID(move.from.x,move.from.y);
-    int move_toID=(*board_).getPiecesID(move.from.x,move.from.y);
-    PieceColor move_fromColor = (*board_).piece[move_fromID].GetColor();
-    PieceColor move_toColor =  (*board_).piece[move_toID].GetColor();
+    // if (move.player != game_info_->current_player_) {
+    //     return SurakartaIllegalMoveReason::NOT_PLAYER_TURN;
+    // }
+    // if (move.from.x >= BOARD_SIZE || move.from.y >= BOARD_SIZE || move.to.x >= BOARD_SIZE || move.to.y >= BOARD_SIZE)
+    //     return SurakartaIllegalMoveReason::OUT_OF_BOARD;
+    // std::vector<SurakartaPosition> loopin, loopout, loopboth;
+    // int move_fromID=(*board_).getPiecesID(move.from.x,move.from.y);
+    // SurakartaPosition move_toPosition(move.to.x,move.to.y);
+    // std::cout<<"move_from:"<<move.from<<std::endl;
+
+    // PieceColor move_fromColor = board_->xy2PositionColor(move.from.x,move.from.y);
+    PieceColor move_toColor = board_->xy2PositionColor(move.to.x,move.to.y);
+
+    // std::cout<<"move_from："<<move.from<<" move_to :"<<move.to<<std::endl;
+    // std::cout<<"From "<<move_fromColor<<" move_toColor "<<move_toColor<<std::endl;
     // NOT_PIECE:2
-    if (move_fromColor == PieceColor::NONE)
-        return SurakartaIllegalMoveReason::NOT_PIECE;
-    // NOT_PLAYER_PIECE:3
-    if (move_fromColor != game_info_->current_player_)
-        return SurakartaIllegalMoveReason::NOT_PLAYER_PIECE;
+    // if (move_fromColor == PieceColor::NONE)
+    //     return SurakartaIllegalMoveReason::NOT_PIECE;
+    // // NOT_PLAYER_PIECE:3
+    // if (move_fromColor != game_info_->current_player_)
+    //     return SurakartaIllegalMoveReason::NOT_PLAYER_PIECE;
     // capure:
-    bool flag = 0;
+    bool flag = false;
     if (move_toColor != PieceColor::NONE) {
         if (move_toColor == game_info_->current_player_)
             return SurakartaIllegalMoveReason::ILLIGAL_NON_CAPTURE_MOVE;
@@ -557,6 +562,7 @@ std::unique_ptr<std::vector<SurakartaPosition>> SurakartaRuleManager::GetAllLega
     SurakartaMove possible_steps_tmp;
     std::vector<SurakartaPosition> AllLegalTarget, current_player_, last_player_;
     // 吃子
+    //有问题，请修改后食用
     for (unsigned int i = 0; i < board_size_; i++) {
         for (unsigned int j = 0; j < board_size_; j++) {
             SurakartaPosition position = {i, j};
