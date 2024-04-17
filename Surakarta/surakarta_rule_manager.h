@@ -1,23 +1,33 @@
 #pragma once
 
 // #include <iostream>
+
+
 #include <memory>
 #include <vector>
 #include "surakarta_common.h"
+//#include "surakarta_game.h"
 
-class SurakartaRuleManager {
-   public:
-    SurakartaRuleManager() = default;
+
+
+#include <QTimer>
+#include <QObject>
+
+class SurakartaRuleManager : public QObject {
+    Q_OBJECT // 必须添加这个宏来启用 Qt 的元对象系统
+
+public:
+    //SurakartaRuleManager(QObject *parent = nullptr) : QObject(parent) {}
 
     SurakartaRuleManager(std::shared_ptr<SurakartaBoard> board,
                          std::shared_ptr<SurakartaGameInfo> game_info)
         :
-          board_(std::const_pointer_cast<const SurakartaBoard>(board)),
-        game_info_(std::const_pointer_cast<const SurakartaGameInfo>(game_info)) {board_size_=BOARD_SIZE;}
+        board_(std::const_pointer_cast<const SurakartaBoard>(board)),
+        game_info_(std::const_pointer_cast<const SurakartaGameInfo>(game_info)) {
+        board_size_ = BOARD_SIZE;
 
-    unsigned int GetBoardSize() {
-        return board_size_;
     }
+
 
     virtual void OnUpdateBoard();
 
@@ -40,11 +50,17 @@ class SurakartaRuleManager {
     virtual std::unique_ptr<std::vector<SurakartaPosition>> GetAllLegalTarget(const SurakartaPosition postion);
 
     //    protected:
+    //SurakartaGame game_;
     unsigned int board_size_;
     std::shared_ptr<const SurakartaBoard> board_;
     std::shared_ptr<const SurakartaGameInfo> game_info_;
+    //std::shared_ptr<const SurakartaGame> game_;
+
+
+
 
    public:
+
     // TODO:
     //  define your own functions/variables here
     // void HelloWorld();

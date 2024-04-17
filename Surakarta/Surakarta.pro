@@ -20,6 +20,7 @@ SOURCES += \
 HEADERS += \
     surakarta_board.h \
     surakarta_piece.h \
+    ui_widget.h \
     widget.h \
     global_random_generator.h \
     surakarta_common.h \
@@ -36,3 +37,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 FORMS += \
      widget.ui
+
+MOC += surakarta_rule_manager.h
+MOC += surakarta_game.h

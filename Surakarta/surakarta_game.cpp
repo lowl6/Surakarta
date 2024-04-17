@@ -1,4 +1,9 @@
 #include "surakarta_game.h"
+#include <QMessageBox>
+#include "ui_widget.h"
+#include <QTimer>
+
+
 
 
 // #include <fstream>
@@ -34,15 +39,52 @@
 // }
 
 void SurakartaGame::UpdateGameInfo(SurakartaIllegalMoveReason move_reason, SurakartaEndReason end_reason, SurakartaPlayer winner) {
+   /* blackTimerId = new QTimer(this);
+    whiteTimerId = new QTimer(this);
+    connect(blackTimerId, &QTimer::timeout, this, &SurakartaGame::handle_timeout);
+    connect(whiteTimerId, &QTimer::timeout, this, &SurakartaGame::handle_timeout);*/
+
     if (move_reason == SurakartaIllegalMoveReason::LEGAL_CAPTURE_MOVE) {
         game_info_->last_captured_round_ = game_info_->num_round_;
     }
     if (!IsEndReason(end_reason)) {
         game_info_->current_player_ = ReverseColor(game_info_->current_player_);
         game_info_->num_round_++;
+
+        /*if(game_info_->current_player_ == SurakartaPlayer::BLACK){
+            whiteTimerId->stop();
+            delete whiteTimerId;
+            blackTimerId->start(10000);
+
+        }else{
+            blackTimerId->stop();
+            delete blackTimerId;
+            whiteTimerId->start(10000);
+        }*/
+
+
     } else {
         game_info_->end_reason_ = end_reason;
         game_info_->winner_ = winner;
+
+        QMessageBox msgBox;
+
+        msgBox.setWindowTitle("Game Over");
+        if(game_info_->winner_== SurakartaPlayer::BLACK){
+            msgBox.setText("The game is over!  winner : BLACK");
+        }else{
+            msgBox.setText("The game is over!  winner : WHITE");
+        }
+
+        msgBox.addButton(QMessageBox::Ok);
+
+        // 设置消息框的图标
+        msgBox.setIcon(QMessageBox::Information);
+
+        // 显示消息框
+        msgBox.exec();
+
+
     }
 }
 

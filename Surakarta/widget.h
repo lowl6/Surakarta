@@ -5,7 +5,6 @@
 #include<QPaintEvent>
 #include<QPainter>
 #include<QMouseEvent>
-#include "surakarta_common.h"
 #include "surakarta_game.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
