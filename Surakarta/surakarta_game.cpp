@@ -4,25 +4,25 @@
 // #include <fstream>
 
 // void SurakartaGame::StartGame(std::string file_name) {
-//     // if (file_name.empty()) {
-//     //     for (unsigned int y = 0; y < board_size_; y++) {
-//     //         for (unsigned int x = 0; x < board_size_; x++) {
-//     //             if (y < 2) {
-//     //                 (*board_)[x][y] = std::make_shared<SurakartaPiece>(x, y, PieceColor::BLACK);
-//     //             } else if (y >= board_size_ - 2) {
-//     //                 (*board_)[x][y] = std::make_shared<SurakartaPiece>(x, y, PieceColor::WHITE);
-//     //             } else {
-//     //                 (*board_)[x][y] = std::make_shared<SurakartaPiece>(x, y, PieceColor::NONE);
-//     //             }
-//     //         }
-//     //     }
-//     //     game_info_->Reset();
-//     // } else {
-//     //     std::ifstream fin(file_name);
-//     //     fin >> (*board_);
-//     //     fin >> (*game_info_);
-//     //     fin.close();
-//     // }
+//     if (file_name.empty()) {
+//         for (unsigned int y = 0; y < board_size_; y++) {
+//             for (unsigned int x = 0; x < board_size_; x++) {
+//                 if (y < 2) {
+//                     (*board_)[x][y] = std::make_shared<SurakartaPiece>(x, y, PieceColor::BLACK);
+//                 } else if (y >= board_size_ - 2) {
+//                     (*board_)[x][y] = std::make_shared<SurakartaPiece>(x, y, PieceColor::WHITE);
+//                 } else {
+//                     (*board_)[x][y] = std::make_shared<SurakartaPiece>(x, y, PieceColor::NONE);
+//                 }
+//             }
+//         }
+//         game_info_->Reset();
+//     } else {
+//         std::ifstream fin(file_name);
+//         fin >> (*board_);
+//         fin >> (*game_info_);
+//         fin.close();
+//     }
 //     rule_manager_->OnUpdateBoard();
 // }
 

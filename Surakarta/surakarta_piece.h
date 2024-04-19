@@ -100,7 +100,6 @@ public:
     //     os << piece.color_;
     //     return os;
     // }
-
     //    private:
     SurakartaPosition position_;
     PieceColor color_;
