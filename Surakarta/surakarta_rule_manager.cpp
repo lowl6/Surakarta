@@ -507,6 +507,16 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
 
 std::pair<SurakartaEndReason, SurakartaPlayer> SurakartaRuleManager::JudgeEnd(const SurakartaIllegalMoveReason reason) {
 
+    if(reason == SurakartaIllegalMoveReason::NO_MOVE){
+        if(game_info_->current_player_== SurakartaPlayer::BLACK){
+            return std::make_pair(SurakartaEndReason::TIMEOUT, SurakartaPlayer::WHITE);
+        }else{
+            return std::make_pair(SurakartaEndReason::TIMEOUT, SurakartaPlayer::BLACK);
+        }
+
+    }
+
+
     // TODO: Implement this function.
     // Note that at this point, the board and game_info have not been updated yet.
 

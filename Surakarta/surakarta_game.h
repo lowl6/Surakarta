@@ -40,21 +40,37 @@ class SurakartaMoveResponse {
     SurakartaPlayer winner_;
 };
 
+
+
 class SurakartaGame : public QObject {
     Q_OBJECT
 
 public:
 
+    SurakartaGame(unsigned board_size = BOARD_SIZE, unsigned int max_no_capture_round = 40)
+        : board_size_(board_size),
+        board_(std::make_shared<SurakartaBoard>(board_size)),
+        game_info_(std::make_shared<SurakartaGameInfo>(max_no_capture_round)),
+        rule_manager_(std::make_shared<SurakartaRuleManager>(board_, game_info_)),
+        // agent_(std::make_shared<SurakartaAgentBase>(board_, game_info_, rule_manager_)) {}
+        checktimeout(false),
+        blackTimerId(new QTimer(this)),
+        whiteTimerId(new QTimer(this))
+    {
+        connect(blackTimerId, &QTimer::timeout, this, &SurakartaGame::handle_timeout);
+        connect(whiteTimerId, &QTimer::timeout, this, &SurakartaGame::handle_timeout);
+        blackTimerId->setInterval(10000); // 设置计时器间隔为10秒
+        whiteTimerId->setInterval(10000); // 设置计时器间隔为10秒
+    }
 
-    /*~SurakartaGame() {
+    ~SurakartaGame() {
         delete blackTimerId;
         delete whiteTimerId;
     }
 
     void handle_timeout(){
-        //checktimeout = true;
-        blackTimerId->stop();
-        whiteTimerId->stop();
+        delete blackTimerId;
+        delete whiteTimerId;
 
         QMessageBox msgBox;
 
@@ -73,17 +89,9 @@ public:
         // 显示消息框
         msgBox.exec();
 
-
-    }*/
-
-
-
-    SurakartaGame(unsigned board_size = BOARD_SIZE, unsigned int max_no_capture_round = 40)
-        : board_size_(board_size),
-          board_(std::make_shared<SurakartaBoard>(board_size)),
-          game_info_(std::make_shared<SurakartaGameInfo>(max_no_capture_round)),
-           rule_manager_(std::make_shared<SurakartaRuleManager>(board_, game_info_)){}
-          // agent_(std::make_shared<SurakartaAgentBase>(board_, game_info_, rule_manager_)) {}
+        checktimeout = true;
+        //auto [end_reason, winner] = rule_manager_->JudgeEnd(SurakartaIllegalMoveReason::NO_MOVE);
+    }
 
 
     /**
@@ -130,13 +138,10 @@ public:
     std::shared_ptr<SurakartaGameInfo> game_info_;
     std::shared_ptr<SurakartaRuleManager> rule_manager_;
 
+    bool checktimeout;
     QTimer* blackTimerId;               // 黑方定时器
     QTimer* whiteTimerId;               // 白方定时器
-    //bool checktimeout;
 
-public slots:
-    //void BlackTimerUpdate();            // 更新黑方定时器
-    //void WhiteTimerUpdate();            // 更新白方定时器
 
 
 

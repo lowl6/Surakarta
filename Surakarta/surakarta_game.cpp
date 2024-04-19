@@ -1,6 +1,5 @@
 #include "surakarta_game.h"
 #include <QMessageBox>
-#include "ui_widget.h"
 #include <QTimer>
 
 
@@ -39,31 +38,30 @@
 // }
 
 void SurakartaGame::UpdateGameInfo(SurakartaIllegalMoveReason move_reason, SurakartaEndReason end_reason, SurakartaPlayer winner) {
-   /* blackTimerId = new QTimer(this);
-    whiteTimerId = new QTimer(this);
-    connect(blackTimerId, &QTimer::timeout, this, &SurakartaGame::handle_timeout);
-    connect(whiteTimerId, &QTimer::timeout, this, &SurakartaGame::handle_timeout);*/
+
 
     if (move_reason == SurakartaIllegalMoveReason::LEGAL_CAPTURE_MOVE) {
         game_info_->last_captured_round_ = game_info_->num_round_;
     }
-    if (!IsEndReason(end_reason)) {
+    if (!IsEndReason(end_reason) && !(checktimeout)) {
         game_info_->current_player_ = ReverseColor(game_info_->current_player_);
         game_info_->num_round_++;
 
-        /*if(game_info_->current_player_ == SurakartaPlayer::BLACK){
-            whiteTimerId->stop();
-            delete whiteTimerId;
-            blackTimerId->start(10000);
-
-        }else{
-            blackTimerId->stop();
-            delete blackTimerId;
-            whiteTimerId->start(10000);
-        }*/
+        if (game_info_->current_player_ == SurakartaPlayer::BLACK) {
+            if (!blackTimerId->isActive()) // 如果黑方计时器未激活，则启动它
+                blackTimerId->start();
+            if (whiteTimerId->isActive()) // 如果白方计时器激活，则停止它
+                whiteTimerId->stop();
+        } else {
+            if (!whiteTimerId->isActive()) // 如果白方计时器未激活，则启动它
+                whiteTimerId->start();
+            if (blackTimerId->isActive()) // 如果黑方计时器激活，则停止它
+                blackTimerId->stop();
+        }
 
 
     } else {
+
         game_info_->end_reason_ = end_reason;
         game_info_->winner_ = winner;
 
