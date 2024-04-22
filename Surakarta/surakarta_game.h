@@ -138,6 +138,7 @@ public:
     std::shared_ptr<SurakartaGameInfo> game_info_;
     std::shared_ptr<SurakartaRuleManager> rule_manager_;
 
+    //void resettime();
     bool checktimeout;
     QTimer* blackTimerId;               // 黑方定时器
     QTimer* whiteTimerId;               // 白方定时器

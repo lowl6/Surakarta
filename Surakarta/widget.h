@@ -16,6 +16,7 @@ class Widget : public QWidget
 {
     Q_OBJECT
 
+
 public:
     Widget(QWidget *parent = nullptr);
     std::shared_ptr<SurakartaGame> game;
@@ -28,7 +29,7 @@ public:
     void mouseReleaseEvent(QMouseEvent*ev);
     void toSelectPieces(int id);
     bool canSelect(int id);
-
+    void repaintEvent(QPaintEvent *);
     ~Widget();
 
 private:

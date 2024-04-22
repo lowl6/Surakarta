@@ -20,6 +20,7 @@ class SurakartaBoard
 public:
     SurakartaBoard(unsigned int );
     ~SurakartaBoard();
+    void reset();
     int cell_width=50;             //格子宽度
     int  piece_radius=cell_width*3/7;// r棋子的半径
     int selectId;              // 被选中的棋子
@@ -31,6 +32,8 @@ public:
         return position.x < BOARD_SIZE && position.y < BOARD_SIZE;
     }
     unsigned int boardSize;
+
+
 
 private:
          // Ui::SurakartaBoard *ui;
