@@ -15,6 +15,8 @@
 #include <QtWidgets/QWidget>
 #include <QMessageBox>
 #include <QString>
+#include <widget.h>
+
 
 QT_BEGIN_NAMESPACE
 
@@ -23,23 +25,34 @@ class Ui_Widget
 public:
     QPushButton *pushButton;
     QPushButton *pushButton2;
-
-    void setupUi(QWidget *Widget)
+    QPushButton *restartButton;
+    void setupUi(Widget *Widget)
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName("Widget");
         Widget->resize(800, 600);
         pushButton = new QPushButton(Widget);
         pushButton2 = new QPushButton(Widget);
+        restartButton = new QPushButton(Widget);
+
         pushButton->setObjectName("pushButton");
         pushButton2->setObjectName("pushButton2");
-
+        restartButton->setObjectName("restartButton");
         pushButton->setGeometry(QRect(650, 510, 92, 28));
         pushButton2->setGeometry(QRect(650, 470, 92, 28));
-
+        restartButton->setGeometry(QRect(650, 550, 92, 28));
         retranslateUi(Widget);
         QObject::connect(pushButton, &QPushButton::clicked, Widget, qOverload<>(&QWidget::close));
         QObject::connect(pushButton2, &QPushButton::clicked, &Ui_Widget::resign);
+        //QObject::connect(restartButton, &QPushButton::clicked,Widget->board,&Widget->board->reset() );
+        QObject::connect(restartButton, &QPushButton::clicked, [=]() {
+            Widget->board->reset();
+        });
+        //QObject::connect(restartButton, &QPushButton::clicked, [=]() {
+            //Widget->game->resettime();
+       // });
+        QObject::connect(restartButton, &QPushButton::clicked, Widget, qOverload<>(&QWidget::update));
+
 
 
         QMetaObject::connectSlotsByName(Widget);
@@ -52,6 +65,7 @@ public:
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "Widget", nullptr));
         pushButton->setText(QCoreApplication::translate("Widget", "\351\200\200\345\207\272\346\270\270\346\210\217", nullptr));
         pushButton2->setText(QCoreApplication::translate("Widget", "认输", nullptr));
+        restartButton->setText(QCoreApplication::translate("Widget", "重新开始", nullptr));
     } // retranslateUi
 
     static void resign(){
@@ -63,6 +77,11 @@ public:
         msgBox.exec();
     }
 
+    //void restart()
+    //{
+        //surakartaBoard = new SurakartaBoard(BOARD_SIZE);
+       // board.reset();
+    //}
 
 
     /*unsigned int board_size_;
