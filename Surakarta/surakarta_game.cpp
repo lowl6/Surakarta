@@ -36,6 +36,10 @@
 //     fout << (*game_info_);
 //     fout.close();
 // }
+//void SurakartaGame::resettime()
+//{
+   // checktimeout=false;
+//}
 
 void SurakartaGame::UpdateGameInfo(SurakartaIllegalMoveReason move_reason, SurakartaEndReason end_reason, SurakartaPlayer winner) {
 
@@ -73,6 +77,7 @@ void SurakartaGame::UpdateGameInfo(SurakartaIllegalMoveReason move_reason, Surak
         }else{
             msgBox.setText("The game is over!  winner : WHITE");
         }
+        checktimeout=false;
 
         msgBox.addButton(QMessageBox::Ok);
 

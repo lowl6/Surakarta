@@ -1,11 +1,13 @@
 #include "widget.h"
 #include "ui_widget.h"
+
 Widget::Widget(QWidget *parent)
     : QWidget(parent),
    game(std::make_shared<SurakartaGame>(BOARD_SIZE,40)) , ui(new Ui::Widget)
 {
     ui->setupUi(this);
     QPainter painter(this);
+    // connect(this, &Widget::repaintRequested, this, &Widget::repaintEvent);
 }
 Widget::~Widget()
 {
@@ -109,6 +111,7 @@ void Widget::drawPiece(QPainter & painter, int id)
         }
     }
 }
+
 void Widget::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -138,4 +141,30 @@ void Widget::paintEvent(QPaintEvent *)
         drawPiece(painter,i);
     }
 
+}
+void Widget::repaintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    QPen pen;
+    pen.setWidth(3);
+    painter.setPen(pen);
+
+    //画竖线
+    for(int i= board->cell_width;i<=6* board->cell_width;i+= board->cell_width){
+        painter.drawLine(QPoint(i+ board->cell_width, board->cell_width*2),QPoint(i+ board->cell_width, board->cell_width*7));
+    }
+    //画横线
+    for(int i= board->cell_width;i<= board->cell_width*6;i+= board->cell_width){
+        painter.drawLine(QPoint( board->cell_width*2,i+ board->cell_width),QPoint(7* board->cell_width,i+ board->cell_width));
+    }
+    //画外旋线
+    painter.drawArc( board->cell_width, board->cell_width,2* board->cell_width,2* board->cell_width,0, board->cell_width*27/5*16);
+    painter.drawArc(0,0,4* board->cell_width,4* board->cell_width,0, board->cell_width*27/5*16);
+    painter.drawArc(6* board->cell_width, board->cell_width,2* board->cell_width,2* board->cell_width, board->cell_width*27/5*16, board->cell_width*27/5*16);
+    painter.drawArc( board->cell_width*5,0,4* board->cell_width,4* board->cell_width, board->cell_width*27/5*16, board->cell_width*27/5*16);
+    painter.drawArc( board->cell_width,6* board->cell_width,2* board->cell_width,2* board->cell_width,90*16, board->cell_width*27/5*16);
+    painter.drawArc(0,5* board->cell_width,4* board->cell_width,4* board->cell_width, board->cell_width*9/5*16, board->cell_width*27/5*16);
+    painter.drawArc(6* board->cell_width,6* board->cell_width,2* board->cell_width,2* board->cell_width, board->cell_width*18/5*16, board->cell_width*27/5*16);
+    painter.drawArc(5* board->cell_width,5* board->cell_width,4* board->cell_width,4* board->cell_width, board->cell_width*18/5*16, board->cell_width*27/5*16);
+    //画棋子
 }

@@ -18,6 +18,24 @@ SurakartaBoard::SurakartaBoard(unsigned int boardsize)
         }
     }
 }
+void SurakartaBoard:: reset()
+{
+    selectId=-1;
+    isBlackTurn=true;
+    int i=0;
+    for (unsigned int y = 0; y < BOARD_SIZE; y++) {
+        for (unsigned int x = 0; x < BOARD_SIZE; x++) {
+            if (y < 2) {
+                SurakartaPosition position(x,y);
+                piece[i++].Set(position, PieceColor::BLACK);
+            } else if (y >= BOARD_SIZE - 2) {
+                SurakartaPosition position(x,y);
+                piece[i++].Set(position, PieceColor::WHITE);
+            }
+        }
+    }
+    //SurakartaGame::checktimeout
+}
 SurakartaBoard:: ~SurakartaBoard(){
 }
 int SurakartaBoard::getPiecesID(unsigned int row, unsigned int col) const
