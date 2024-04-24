@@ -51,6 +51,8 @@ void Widget::toSelectPieces(int id)
     if(!canSelect(id)) {
         return;
     }
+    //画可以走的位置 std::vector<SurakartaPosition>
+    //game->rule_manager_->GetAllLegalTarget();
     board->selectId = id;
     update();
 }
@@ -70,6 +72,7 @@ void Widget::mouseReleaseEvent(QMouseEvent*ev)
     /*判断点击的位置是否合法（是否在棋盘坐标的棋子范围内），同时计算出对应的棋盘行列坐标*/
     int row, col;
     if(!getRowCol(ev->pos(), row, col)) {
+
         return;
     }
     /*获取当前坐标上的棋子*/
@@ -134,4 +137,5 @@ void Widget::paintEvent(QPaintEvent *)
     for(int i=0;i<24;i++){
         drawPiece(painter,i);
     }
+
 }
