@@ -32,7 +32,6 @@ public:
     void toSelectPieces(int id);
     bool canSelect(int id);
     void repaintEvent(QPaintEvent *);
-    int pieces_change(int row, int col, int id);
     ~Widget();
 
 private:

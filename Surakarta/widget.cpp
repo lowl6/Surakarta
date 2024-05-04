@@ -69,22 +69,6 @@ bool Widget::canSelect(int id)
     return board->isBlackTurn == (board->piece[id].color_==PieceColor::BLACK);
 }
 
-/*int Widget::pieces_change(int row, int col, int id){
-    int _id=0;
-    int _col=0;
-    int _row=0;
-    if(board->piece[board->getPiecesID(row, col)].color_ != board->piece[id].color_){
-        return id ;
-    }else{
-        _id=id;
-        _col=col;
-        _row=row;
-        id = board->getPiecesID(row, col);
-        toSelectPieces(id);
-        return pieces_change(_row, _col, _id);
-    }
-
-}*/
 
 void Widget::mouseReleaseEvent(QMouseEvent*ev)
 {
