@@ -19,16 +19,16 @@ QT_BEGIN_NAMESPACE
 class Ui_Widget
 {
 public:
-    QPushButton *pushButton_2;
+    QPushButton *admit_defeat;
 
     void setupUi(QWidget *Widget)
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName("Widget");
         Widget->resize(800, 600);
-        pushButton_2 = new QPushButton(Widget);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(650, 460, 91, 31));
+        admit_defeat = new QPushButton(Widget);
+        admit_defeat->setObjectName("admit_defeat");
+        admit_defeat->setGeometry(QRect(650, 460, 91, 31));
 
         retranslateUi(Widget);
 
@@ -38,7 +38,7 @@ public:
     void retranslateUi(QWidget *Widget)
     {
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "Widget", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("Widget", "\350\256\244\350\276\223", nullptr));
+        admit_defeat->setText(QCoreApplication::translate("Widget", "\350\256\244\350\276\223", nullptr));
     } // retranslateUi
 
 };
