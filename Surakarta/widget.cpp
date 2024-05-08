@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "surakarta_common.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent),
@@ -53,7 +54,12 @@ void Widget::toSelectPieces(int id)
     if(!canSelect(id)) {
         return;
     }
-    board->selectId = id;
+    if(board->piece[id].color_ == (board->isBlackTurn ? PieceColor::BLACK : PieceColor::WHITE)) {
+        board->selectId = id;
+    }else{
+        board->selectId = id;
+    }
+
     update();
 }
 bool Widget::canSelect(int id)
@@ -62,6 +68,7 @@ bool Widget::canSelect(int id)
         return false;
     return board->isBlackTurn == (board->piece[id].color_==PieceColor::BLACK);
 }
+
 
 void Widget::mouseReleaseEvent(QMouseEvent*ev)
 {
@@ -80,12 +87,22 @@ void Widget::mouseReleaseEvent(QMouseEvent*ev)
         /*选择棋子*/
         toSelectPieces(id);
     } else {
+        if(board->piece[board->getPiecesID(row, col)].color_ == board->piece[board->selectId].color_){
+
+            id = board->getPiecesID(row, col);
+            toSelectPieces(id);
+
+        }else{
+
         SurakartaPosition from(board->piece[board->selectId].position_.x,board->piece[board->selectId].position_.y);
         SurakartaPosition to(row,col);
         SurakartaMove move(from,to,game->game_info_->current_player_);
         game->Move(move);
         board->selectId = -1;
         update();
+        }
+
+
     }
 }
 //与显示到窗口中有关的函数

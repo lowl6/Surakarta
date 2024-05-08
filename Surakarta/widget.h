@@ -6,6 +6,8 @@
 #include<QPainter>
 #include<QMouseEvent>
 #include "surakarta_game.h"
+#include "surakarta_common.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Widget;
