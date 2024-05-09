@@ -10,6 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    mainbegin.cpp \
+    netwindow.cpp \
     surakarta_board.cpp \
     widget.cpp \
     surakarta_game.cpp \
@@ -18,6 +20,8 @@ SOURCES += \
     surakarta_agent/surakarta_agent_mine.cpp\
 
 HEADERS += \
+    mainbegin.h \
+    netwindow.h \
     surakarta_board.h \
     surakarta_piece.h \
     ui_widget.h \
@@ -36,6 +40,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
+     mainbegin.ui \
+     netwindow.ui \
      widget.ui
 
 MOC += surakarta_rule_manager.h
