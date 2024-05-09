@@ -25,10 +25,10 @@ public:
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName("Widget");
-        Widget->resize(800, 600);
+        Widget->resize(1136, 835);
         admit_defeat = new QPushButton(Widget);
         admit_defeat->setObjectName("admit_defeat");
-        admit_defeat->setGeometry(QRect(650, 460, 91, 31));
+        admit_defeat->setGeometry(QRect(860, 580, 91, 31));
 
         retranslateUi(Widget);
 

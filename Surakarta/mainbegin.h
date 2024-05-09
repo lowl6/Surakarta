@@ -1,8 +1,7 @@
 #ifndef MAINBEGIN_H
 #define MAINBEGIN_H
- #include "widget.h"
 #include <QDialog>
- #include "netwindow.h"
+#include "netwindow.h"
 
 namespace Ui {
 class mainbegin;

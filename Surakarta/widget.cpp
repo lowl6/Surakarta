@@ -5,7 +5,7 @@
 Widget::Widget(QWidget *parent)
     : QWidget(parent),
       game(std::make_shared<SurakartaGame>(BOARD_SIZE, 40)), ui(new Ui::Widget)
-{
+{  
     ui->setupUi(this);
     QPainter painter(this);
     // connect(this, &Widget::repaintRequested, this, &Widget::repaintEvent);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1136</width>
+    <height>835</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="admit_defeat">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>460</y>
+     <x>860</x>
+     <y>580</y>
      <width>91</width>
      <height>31</height>
     </rect>

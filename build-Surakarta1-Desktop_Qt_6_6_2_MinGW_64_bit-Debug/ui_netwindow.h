@@ -23,7 +23,7 @@ public:
     {
         if (netwindow->objectName().isEmpty())
             netwindow->setObjectName("netwindow");
-        netwindow->resize(400, 300);
+        netwindow->resize(1154, 626);
 
         retranslateUi(netwindow);
 
