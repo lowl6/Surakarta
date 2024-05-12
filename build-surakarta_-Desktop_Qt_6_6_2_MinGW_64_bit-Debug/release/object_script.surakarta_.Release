@@ -1,0 +1,16 @@
+release/client.o
+release/networkdata.o
+release/networksocket.o
+release/main.o
+release/mainbegin.o
+release/netwindow.o
+release/surakarta_board.o
+release/surakarta_game.o
+release/surakarta_reason.o
+release/surakarta_rule_manager.o
+release/widget.o
+release/moc_mainbegin.o
+release/moc_netwindow.o
+release/moc_surakarta_game.o
+release/moc_surakarta_rule_manager.o
+release/moc_widget.o
