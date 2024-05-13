@@ -9,6 +9,7 @@ debug/surakarta_game.o
 debug/surakarta_reason.o
 debug/surakarta_rule_manager.o
 debug/widget.o
+debug/moc_networksocket.o
 debug/moc_mainbegin.o
 debug/moc_netwindow.o
 debug/moc_surakarta_game.o

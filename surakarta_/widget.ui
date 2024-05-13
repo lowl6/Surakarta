@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1136</width>
-    <height>835</height>
+    <width>850</width>
+    <height>571</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,9 @@
   <widget class="QPushButton" name="admit_defeat">
    <property name="geometry">
     <rect>
-     <x>700</x>
-     <y>460</y>
-     <width>121</width>
+     <x>540</x>
+     <y>440</y>
+     <width>291</width>
      <height>31</height>
     </rect>
    </property>
@@ -29,9 +29,9 @@
   <widget class="QPushButton" name="restart">
    <property name="geometry">
     <rect>
-     <x>700</x>
-     <y>510</y>
-     <width>121</width>
+     <x>540</x>
+     <y>490</y>
+     <width>291</width>
      <height>31</height>
     </rect>
    </property>

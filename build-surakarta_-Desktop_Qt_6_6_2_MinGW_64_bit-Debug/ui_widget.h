@@ -26,13 +26,13 @@ public:
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName("Widget");
-        Widget->resize(1136, 835);
+        Widget->resize(850, 571);
         admit_defeat = new QPushButton(Widget);
         admit_defeat->setObjectName("admit_defeat");
-        admit_defeat->setGeometry(QRect(700, 460, 121, 31));
+        admit_defeat->setGeometry(QRect(540, 440, 291, 31));
         restart = new QPushButton(Widget);
         restart->setObjectName("restart");
-        restart->setGeometry(QRect(700, 510, 121, 31));
+        restart->setGeometry(QRect(540, 490, 291, 31));
 
         retranslateUi(Widget);
 

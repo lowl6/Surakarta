@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1040</width>
+    <width>912</width>
     <height>641</height>
    </rect>
   </property>
@@ -16,9 +16,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>530</y>
-     <width>81</width>
+     <x>250</x>
+     <y>560</y>
+     <width>171</width>
      <height>16</height>
     </rect>
    </property>
@@ -32,9 +32,9 @@
   <widget class="QLineEdit" name="ip_edit">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>470</y>
-     <width>111</width>
+     <x>50</x>
+     <y>500</y>
+     <width>121</width>
      <height>20</height>
     </rect>
    </property>
@@ -45,9 +45,9 @@
   <widget class="QPushButton" name="disconnect_button">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>560</y>
-     <width>281</width>
+     <x>50</x>
+     <y>590</y>
+     <width>371</width>
      <height>21</height>
     </rect>
    </property>
@@ -58,9 +58,9 @@
   <widget class="QLineEdit" name="receive_edit">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>530</y>
-     <width>181</width>
+     <x>50</x>
+     <y>560</y>
+     <width>191</width>
      <height>20</height>
     </rect>
    </property>
@@ -68,9 +68,9 @@
   <widget class="QPushButton" name="connect_button">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>470</y>
-     <width>80</width>
+     <x>250</x>
+     <y>500</y>
+     <width>171</width>
      <height>20</height>
     </rect>
    </property>
@@ -81,9 +81,9 @@
   <widget class="QLineEdit" name="send_edit">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>500</y>
-     <width>181</width>
+     <x>50</x>
+     <y>530</y>
+     <width>191</width>
      <height>20</height>
     </rect>
    </property>
@@ -91,9 +91,9 @@
   <widget class="QLineEdit" name="port_edit">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>470</y>
-     <width>51</width>
+     <x>180</x>
+     <y>500</y>
+     <width>61</width>
      <height>20</height>
     </rect>
    </property>
@@ -104,14 +104,33 @@
   <widget class="QPushButton" name="send_button">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>500</y>
-     <width>81</width>
+     <x>250</x>
+     <y>530</y>
+     <width>171</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
     <string>Send</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>470</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>网络设置：</string>
    </property>
   </widget>
  </widget>
