@@ -16,14 +16,27 @@
   <widget class="QPushButton" name="admit_defeat">
    <property name="geometry">
     <rect>
-     <x>860</x>
-     <y>580</y>
-     <width>91</width>
+     <x>700</x>
+     <y>460</y>
+     <width>121</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>认输</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="restart">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>510</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>再来一局</string>
    </property>
   </widget>
  </widget>

@@ -35,8 +35,8 @@ HEADERS += \
     surakarta/surakarta_piece.h \
     surakarta/surakarta_reason.h \
     surakarta/surakarta_rule_manager.h \
-    ui_widget.h \
-    widget.h
+    widget.h\
+    ui_widget.h
 
 FORMS += \
     ClientNet/client.ui \

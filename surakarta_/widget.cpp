@@ -4,7 +4,7 @@
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent),
-      game(std::make_shared<SurakartaGame>(BOARD_SIZE, 40)), ui(new Ui::Widget)
+    game(std::make_shared<SurakartaGame>(BOARD_SIZE, 40)), ui(new Ui::Widget)
 {  
     ui->setupUi(this);
     QPainter painter(this);
@@ -201,3 +201,22 @@ void Widget::repaintEvent(QPaintEvent *)
     painter.drawArc(5 * board->cell_width, 5 * board->cell_width, 4 * board->cell_width, 4 * board->cell_width, board->cell_width * 18 / 5 * 16, board->cell_width * 27 / 5 * 16);
     // 画棋子
 }
+
+
+void Widget::on_restart_clicked()
+{
+    board->reset();
+    update();
+}
+
+
+void Widget::on_admit_defeat_clicked()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("GAME OVER");
+    msgBox.setText("你输了!");
+    msgBox.addButton(QMessageBox::Ok);
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.exec();
+}
+

@@ -16,7 +16,7 @@ mainbegin::~mainbegin()
 
 void mainbegin::on_online_clicked()
 {
-    Widget *chessboard=new Widget;
+    netwindow *chessboard=new netwindow;
     chessboard->show();
     this->close();
 
@@ -25,7 +25,7 @@ void mainbegin::on_online_clicked()
 
 void mainbegin::on_single_clicked()
 {
-    netwindow *chessboard=new netwindow;
+    Widget *chessboard=new Widget;
     chessboard->show();
     this->close();
 }
