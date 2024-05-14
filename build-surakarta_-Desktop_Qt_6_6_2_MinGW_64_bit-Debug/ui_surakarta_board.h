@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -19,19 +18,14 @@ QT_BEGIN_NAMESPACE
 class Ui_Form
 {
 public:
-    QPushButton *begin;
 
     void setupUi(QWidget *Form)
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName("Form");
         Form->resize(933, 516);
-        begin = new QPushButton(Form);
-        begin->setObjectName("begin");
-        begin->setGeometry(QRect(290, 240, 241, 91));
 
         retranslateUi(Form);
-        QObject::connect(begin, &QPushButton::clicked, Form, qOverload<>(&QWidget::close));
 
         QMetaObject::connectSlotsByName(Form);
     } // setupUi
@@ -39,7 +33,6 @@ public:
     void retranslateUi(QWidget *Form)
     {
         Form->setWindowTitle(QCoreApplication::translate("Form", "Form", nullptr));
-        begin->setText(QCoreApplication::translate("Form", "666", nullptr));
     } // retranslateUi
 
 };

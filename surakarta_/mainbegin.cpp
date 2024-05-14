@@ -6,6 +6,8 @@ mainbegin::mainbegin(QWidget *parent)
     , ui(new Ui::mainbegin)
 {
     ui->setupUi(this);
+    ui->online->setStyleSheet ("border:0.5px groove gray;border-radius:10px;padding:2px 4px;"     "color:rgb(110,174,248)");
+    ui->single->setStyleSheet ("border:0.5px groove gray;border-radius:10px;padding:2px 4px;"   "color:rgb(110,174,248)");
 }
 
 mainbegin::~mainbegin()

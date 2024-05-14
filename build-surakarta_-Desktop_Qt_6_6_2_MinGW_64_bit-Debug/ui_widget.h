@@ -26,7 +26,7 @@ public:
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName("Widget");
-        Widget->resize(850, 571);
+        Widget->resize(877, 569);
         admit_defeat = new QPushButton(Widget);
         admit_defeat->setObjectName("admit_defeat");
         admit_defeat->setGeometry(QRect(540, 440, 291, 31));

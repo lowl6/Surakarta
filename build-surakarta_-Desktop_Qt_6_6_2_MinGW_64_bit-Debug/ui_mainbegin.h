@@ -27,20 +27,23 @@ public:
         if (mainbegin->objectName().isEmpty())
             mainbegin->setObjectName("mainbegin");
         mainbegin->resize(1387, 830);
+        mainbegin->setStyleSheet(QString::fromUtf8("#mainbegin{background-image:url(:/Resources/08cb3185837180b6f109f8be38121a0.jpg);}"));
         single = new QPushButton(mainbegin);
         single->setObjectName("single");
         single->setGeometry(QRect(460, 250, 351, 111));
         QFont font;
         font.setFamilies({QString::fromUtf8("Playbill")});
         font.setPointSize(19);
-        font.setBold(false);
+        font.setBold(true);
         single->setFont(font);
         single->setIconSize(QSize(20, 20));
+        single->setFlat(true);
         online = new QPushButton(mainbegin);
         online->setObjectName("online");
         online->setGeometry(QRect(460, 430, 351, 111));
         online->setFont(font);
         online->setIconSize(QSize(20, 20));
+        online->setFlat(true);
 
         retranslateUi(mainbegin);
 

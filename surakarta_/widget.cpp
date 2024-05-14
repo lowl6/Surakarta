@@ -8,7 +8,7 @@ Widget::Widget(QWidget *parent)
 {  
     ui->setupUi(this);
     QPainter painter(this);
-    // connect(this, &Widget::repaintRequested, this, &Widget::repaintEvent);
+
 }
 Widget::~Widget()
 {
@@ -141,13 +141,18 @@ void Widget::drawPiece(QPainter &painter, int id)
     }
 }
 
-void Widget::paintEvent(QPaintEvent *)
+void Widget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     QPen pen;
+
+    Q_UNUSED(event);
+    painter.setOpacity(0.8);  //0.7
+    painter.drawPixmap(rect(),QPixmap(":/Resources/20240514193115.jpg"), QRect());
+
     pen.setWidth(3);
     painter.setPen(pen);
-
+     painter.setOpacity(1);
     // 画竖线
     for (int i = board->cell_width; i <= 6 * board->cell_width; i += board->cell_width)
     {
