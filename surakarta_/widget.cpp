@@ -7,6 +7,8 @@ Widget::Widget(QWidget *parent)
     game(std::make_shared<SurakartaGame>(BOARD_SIZE, 40)), ui(new Ui::Widget)
 {  
     ui->setupUi(this);
+    ui->restart->setStyleSheet ("border:0.5px groove gray;border-radius:10px;padding:2px 4px;"     "color:rgb(0,0,0)");
+    ui->admit_defeat->setStyleSheet ("border:0.5px groove gray;border-radius:10px;padding:2px 4px;"   "color:rgb(0,0,0)");
     QPainter painter(this);
 
 }

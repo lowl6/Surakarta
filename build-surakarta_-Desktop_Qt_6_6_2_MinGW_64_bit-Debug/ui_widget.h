@@ -29,10 +29,14 @@ public:
         Widget->resize(877, 569);
         admit_defeat = new QPushButton(Widget);
         admit_defeat->setObjectName("admit_defeat");
-        admit_defeat->setGeometry(QRect(540, 440, 291, 31));
+        admit_defeat->setGeometry(QRect(540, 440, 171, 31));
+        QFont font;
+        font.setBold(true);
+        admit_defeat->setFont(font);
         restart = new QPushButton(Widget);
         restart->setObjectName("restart");
-        restart->setGeometry(QRect(540, 490, 291, 31));
+        restart->setGeometry(QRect(540, 490, 171, 31));
+        restart->setFont(font);
 
         retranslateUi(Widget);
 

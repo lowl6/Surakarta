@@ -18,9 +18,14 @@
     <rect>
      <x>540</x>
      <y>440</y>
-     <width>291</width>
+     <width>171</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>认输</string>
@@ -31,9 +36,14 @@
     <rect>
      <x>540</x>
      <y>490</y>
-     <width>291</width>
+     <width>171</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>再来一局</string>
