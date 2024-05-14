@@ -214,7 +214,7 @@ void Widget::on_admit_defeat_clicked()
 {
     QMessageBox msgBox;
     msgBox.setWindowTitle("GAME OVER");
-    msgBox.setText("你输了!");
+    msgBox.setText("再接再厉!");
     msgBox.addButton(QMessageBox::Ok);
     msgBox.setIcon(QMessageBox::Information);
     msgBox.exec();

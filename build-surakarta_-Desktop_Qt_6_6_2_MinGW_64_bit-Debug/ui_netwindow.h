@@ -11,9 +11,12 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,6 +33,14 @@ public:
     QLineEdit *port_edit;
     QPushButton *send_button;
     QLabel *label_2;
+    QGroupBox *groupBox;
+    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout;
+    QLabel *label_3;
+    QLineEdit *room;
+    QRadioButton *BlackrBtn;
+    QRadioButton *WhiterBtn;
+    QPushButton *applyGame;
 
     void setupUi(QWidget *netwindow)
     {
@@ -70,6 +81,45 @@ public:
         font.setPointSize(12);
         font.setBold(true);
         label_2->setFont(font);
+        groupBox = new QGroupBox(netwindow);
+        groupBox->setObjectName("groupBox");
+        groupBox->setGeometry(QRect(520, 30, 291, 201));
+        layoutWidget = new QWidget(groupBox);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(30, 30, 216, 156));
+        verticalLayout = new QVBoxLayout(layoutWidget);
+        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label_3 = new QLabel(layoutWidget);
+        label_3->setObjectName("label_3");
+        QFont font1;
+        font1.setPointSize(10);
+        font1.setBold(false);
+        label_3->setFont(font1);
+        label_3->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(label_3);
+
+        room = new QLineEdit(layoutWidget);
+        room->setObjectName("room");
+
+        verticalLayout->addWidget(room);
+
+        BlackrBtn = new QRadioButton(layoutWidget);
+        BlackrBtn->setObjectName("BlackrBtn");
+
+        verticalLayout->addWidget(BlackrBtn);
+
+        WhiterBtn = new QRadioButton(layoutWidget);
+        WhiterBtn->setObjectName("WhiterBtn");
+
+        verticalLayout->addWidget(WhiterBtn);
+
+        applyGame = new QPushButton(layoutWidget);
+        applyGame->setObjectName("applyGame");
+
+        verticalLayout->addWidget(applyGame);
+
 
         retranslateUi(netwindow);
 
@@ -79,11 +129,16 @@ public:
     void retranslateUi(QWidget *netwindow)
     {
         netwindow->setWindowTitle(QCoreApplication::translate("netwindow", "Form", nullptr));
-        label->setText(QCoreApplication::translate("netwindow", "Receive", nullptr));
-        disconnect_button->setText(QCoreApplication::translate("netwindow", "Disconnect", nullptr));
-        connect_button->setText(QCoreApplication::translate("netwindow", "Connect", nullptr));
-        send_button->setText(QCoreApplication::translate("netwindow", "Send", nullptr));
+        label->setText(QCoreApplication::translate("netwindow", "\346\216\245\346\224\266", nullptr));
+        disconnect_button->setText(QCoreApplication::translate("netwindow", "\346\226\255\345\274\200\350\277\236\346\216\245", nullptr));
+        connect_button->setText(QCoreApplication::translate("netwindow", "\350\277\236\346\216\245", nullptr));
+        send_button->setText(QCoreApplication::translate("netwindow", "\345\217\221\351\200\201", nullptr));
         label_2->setText(QCoreApplication::translate("netwindow", "\347\275\221\347\273\234\350\256\276\347\275\256\357\274\232", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("netwindow", "\345\257\271\345\261\200\344\277\241\346\201\257", nullptr));
+        label_3->setText(QCoreApplication::translate("netwindow", "\346\210\277\351\227\264\345\217\267  ([0,255]\345\206\205\347\232\204\346\225\264\346\225\260)\357\274\232", nullptr));
+        BlackrBtn->setText(QCoreApplication::translate("netwindow", "\346\211\247\351\273\221\345\205\210\350\241\214", nullptr));
+        WhiterBtn->setText(QCoreApplication::translate("netwindow", "\346\211\247\347\231\275\345\220\216\350\241\214", nullptr));
+        applyGame->setText(QCoreApplication::translate("netwindow", "\347\224\263\350\257\267\345\257\271\345\261\200", nullptr));
     } // retranslateUi
 
 };

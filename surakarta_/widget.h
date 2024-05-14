@@ -26,7 +26,7 @@ public:
     bool getRowCol(QPoint pt,int&row,int&col);
     void drawPiece(QPainter & painter, int id);
     void paintEvent(QPaintEvent *); //与显示到窗口中有关的函数
-    void mouseReleaseEvent(QMouseEvent*ev);
+    virtual void mouseReleaseEvent(QMouseEvent*ev);
     void toSelectPieces(int id);
     bool canSelect(int id);
     void repaintEvent(QPaintEvent *);
@@ -35,8 +35,8 @@ public:
 private:
     Ui::Widget *ui;
 
-private slots:
-    void on_restart_clicked();
-    void on_admit_defeat_clicked();
+public slots:
+   virtual void on_restart_clicked();
+   virtual void on_admit_defeat_clicked();
 };
 #endif // WIDGET_H

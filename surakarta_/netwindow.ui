@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Receive</string>
+    <string>接收</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -52,7 +52,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Disconnect</string>
+    <string>断开连接</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="receive_edit">
@@ -75,7 +75,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Connect</string>
+    <string>连接</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="send_edit">
@@ -111,7 +111,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Send</string>
+    <string>发送</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -132,6 +132,71 @@
    <property name="text">
     <string>网络设置：</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>30</y>
+     <width>291</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>对局信息</string>
+   </property>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>216</width>
+      <height>156</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>房间号  ([0,255]内的整数)：</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="room"/>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="BlackrBtn">
+       <property name="text">
+        <string>执黑先行</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="WhiterBtn">
+       <property name="text">
+        <string>执白后行</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="applyGame">
+       <property name="text">
+        <string>申请对局</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <resources/>

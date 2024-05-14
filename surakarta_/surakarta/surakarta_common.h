@@ -20,6 +20,7 @@ struct SurakartaMove {
 };
 
 struct SurakartaGameInfo {
+    SurakartaPlayer player;
     SurakartaPlayer current_player_;
     unsigned int num_round_;
     unsigned int last_captured_round_;
@@ -45,7 +46,7 @@ struct SurakartaGameInfo {
 
     bool IsEnd() const { return IsEndReason(end_reason_); }
     SurakartaPlayer Winner() const { return winner_; }
-
+    //以下输出用于debug
     // friend std::ostream& operator<<(std::ostream& os, const SurakartaGameInfo& game_info) {
     //     os << "current_player: " << game_info.current_player_ << std::endl;
     //     os << "num_round: " << game_info.num_round_ << std::endl;

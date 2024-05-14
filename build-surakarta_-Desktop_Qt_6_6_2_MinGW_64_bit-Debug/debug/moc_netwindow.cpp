@@ -45,11 +45,15 @@ constexpr auto qt_meta_stringdata_CLASSnetwindowENDCLASS = QtMocHelpers::stringD
     "disconnectFromServer",
     "sendMessage",
     "receiveMessage",
-    "NetworkData"
+    "NetworkData",
+    "on_BlackrBtn_clicked",
+    "checked",
+    "on_WhiterBtn_clicked",
+    "on_applyGame_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSnetwindowENDCLASS_t {
-    uint offsetsAndSizes[16];
+    uint offsetsAndSizes[24];
     char stringdata0[10];
     char stringdata1[23];
     char stringdata2[1];
@@ -58,6 +62,10 @@ struct qt_meta_stringdata_CLASSnetwindowENDCLASS_t {
     char stringdata5[12];
     char stringdata6[15];
     char stringdata7[12];
+    char stringdata8[21];
+    char stringdata9[8];
+    char stringdata10[21];
+    char stringdata11[21];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSnetwindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -70,7 +78,11 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSnetwindowENDCLASS_t qt_meta_str
         QT_MOC_LITERAL(50, 20),  // "disconnectFromServer"
         QT_MOC_LITERAL(71, 11),  // "sendMessage"
         QT_MOC_LITERAL(83, 14),  // "receiveMessage"
-        QT_MOC_LITERAL(98, 11)   // "NetworkData"
+        QT_MOC_LITERAL(98, 11),  // "NetworkData"
+        QT_MOC_LITERAL(110, 20),  // "on_BlackrBtn_clicked"
+        QT_MOC_LITERAL(131, 7),  // "checked"
+        QT_MOC_LITERAL(139, 20),  // "on_WhiterBtn_clicked"
+        QT_MOC_LITERAL(160, 20)   // "on_applyGame_clicked"
     },
     "netwindow",
     "connected_successfully",
@@ -79,7 +91,11 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSnetwindowENDCLASS_t qt_meta_str
     "disconnectFromServer",
     "sendMessage",
     "receiveMessage",
-    "NetworkData"
+    "NetworkData",
+    "on_BlackrBtn_clicked",
+    "checked",
+    "on_WhiterBtn_clicked",
+    "on_applyGame_clicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -91,7 +107,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnetwindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -99,11 +115,14 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnetwindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   44,    2, 0x08,    1 /* Private */,
-       3,    0,   45,    2, 0x08,    2 /* Private */,
-       4,    0,   46,    2, 0x08,    3 /* Private */,
-       5,    0,   47,    2, 0x08,    4 /* Private */,
-       6,    1,   48,    2, 0x08,    5 /* Private */,
+       1,    0,   62,    2, 0x08,    1 /* Private */,
+       3,    0,   63,    2, 0x08,    2 /* Private */,
+       4,    0,   64,    2, 0x08,    3 /* Private */,
+       5,    0,   65,    2, 0x08,    4 /* Private */,
+       6,    1,   66,    2, 0x08,    5 /* Private */,
+       8,    1,   69,    2, 0x08,    7 /* Private */,
+      10,    1,   72,    2, 0x08,    9 /* Private */,
+      11,    0,   75,    2, 0x08,   11 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -111,6 +130,9 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnetwindowENDCLASS[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 7,    2,
+    QMetaType::Void, QMetaType::Bool,    9,
+    QMetaType::Void, QMetaType::Bool,    9,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -134,7 +156,15 @@ Q_CONSTINIT const QMetaObject netwindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'receiveMessage'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<NetworkData, std::false_type>
+        QtPrivate::TypeAndForceComplete<NetworkData, std::false_type>,
+        // method 'on_BlackrBtn_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        // method 'on_WhiterBtn_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        // method 'on_applyGame_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -150,6 +180,9 @@ void netwindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 2: _t->disconnectFromServer(); break;
         case 3: _t->sendMessage(); break;
         case 4: _t->receiveMessage((*reinterpret_cast< std::add_pointer_t<NetworkData>>(_a[1]))); break;
+        case 5: _t->on_BlackrBtn_clicked((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 6: _t->on_WhiterBtn_clicked((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 7: _t->on_applyGame_clicked(); break;
         default: ;
         }
     }
@@ -174,13 +207,13 @@ int netwindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 8;
     }
     return _id;
 }
