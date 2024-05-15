@@ -1,6 +1,9 @@
 debug/client.o
 debug/networkdata.o
+debug/networkserver.o
 debug/networksocket.o
+debug/server_main.o
+debug/server_mainwindow.o
 debug/main.o
 debug/mainbegin.o
 debug/netwindow.o
@@ -9,6 +12,8 @@ debug/surakarta_game.o
 debug/surakarta_reason.o
 debug/surakarta_rule_manager.o
 debug/widget.o
+debug/moc_networkserver.o
+debug/moc_server_mainwindow.o
 debug/moc_mainbegin.o
 debug/moc_netwindow.o
 debug/moc_surakarta_game.o
