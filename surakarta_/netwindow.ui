@@ -111,7 +111,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>发送</string>
+    <string>发送聊天</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -136,10 +136,10 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>520</x>
-     <y>30</y>
-     <width>291</width>
-     <height>201</height>
+     <x>540</x>
+     <y>50</y>
+     <width>301</width>
+     <height>301</height>
     </rect>
    </property>
    <property name="title">
@@ -151,7 +151,7 @@
       <x>30</x>
       <y>30</y>
       <width>216</width>
-      <height>156</height>
+      <height>246</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -173,6 +173,42 @@
      </item>
      <item>
       <widget class="QLineEdit" name="room"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>您的对手：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="opponenter_name">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>您选择：</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QRadioButton" name="BlackrBtn">

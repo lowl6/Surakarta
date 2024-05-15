@@ -28,6 +28,10 @@ private:
     bool have_connected=false;
     Ui::netwindow *ui;
     QMessageBox msg;
+    void move_op(NetworkData data);
+    void ready_op(NetworkData data);
+    void reject_op(NetworkData data);
+    void end_op(NetworkData data);
 private slots:
     void connected_successfully();
     void connectToServer();

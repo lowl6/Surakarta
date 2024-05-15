@@ -38,6 +38,9 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *label_3;
     QLineEdit *room;
+    QLabel *label_4;
+    QLineEdit *opponenter_name;
+    QLabel *label_5;
     QRadioButton *BlackrBtn;
     QRadioButton *WhiterBtn;
     QPushButton *applyGame;
@@ -83,10 +86,10 @@ public:
         label_2->setFont(font);
         groupBox = new QGroupBox(netwindow);
         groupBox->setObjectName("groupBox");
-        groupBox->setGeometry(QRect(520, 30, 291, 201));
+        groupBox->setGeometry(QRect(540, 50, 301, 301));
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(30, 30, 216, 156));
+        layoutWidget->setGeometry(QRect(30, 30, 216, 246));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -104,6 +107,25 @@ public:
         room->setObjectName("room");
 
         verticalLayout->addWidget(room);
+
+        label_4 = new QLabel(layoutWidget);
+        label_4->setObjectName("label_4");
+        label_4->setFont(font1);
+
+        verticalLayout->addWidget(label_4);
+
+        opponenter_name = new QLineEdit(layoutWidget);
+        opponenter_name->setObjectName("opponenter_name");
+        opponenter_name->setReadOnly(true);
+
+        verticalLayout->addWidget(opponenter_name);
+
+        label_5 = new QLabel(layoutWidget);
+        label_5->setObjectName("label_5");
+        label_5->setFont(font1);
+        label_5->setScaledContents(true);
+
+        verticalLayout->addWidget(label_5);
 
         BlackrBtn = new QRadioButton(layoutWidget);
         BlackrBtn->setObjectName("BlackrBtn");
@@ -132,10 +154,12 @@ public:
         label->setText(QCoreApplication::translate("netwindow", "\346\216\245\346\224\266", nullptr));
         disconnect_button->setText(QCoreApplication::translate("netwindow", "\346\226\255\345\274\200\350\277\236\346\216\245", nullptr));
         connect_button->setText(QCoreApplication::translate("netwindow", "\350\277\236\346\216\245", nullptr));
-        send_button->setText(QCoreApplication::translate("netwindow", "\345\217\221\351\200\201", nullptr));
+        send_button->setText(QCoreApplication::translate("netwindow", "\345\217\221\351\200\201\350\201\212\345\244\251", nullptr));
         label_2->setText(QCoreApplication::translate("netwindow", "\347\275\221\347\273\234\350\256\276\347\275\256\357\274\232", nullptr));
         groupBox->setTitle(QCoreApplication::translate("netwindow", "\345\257\271\345\261\200\344\277\241\346\201\257", nullptr));
         label_3->setText(QCoreApplication::translate("netwindow", "\346\210\277\351\227\264\345\217\267  ([0,255]\345\206\205\347\232\204\346\225\264\346\225\260)\357\274\232", nullptr));
+        label_4->setText(QCoreApplication::translate("netwindow", "\346\202\250\347\232\204\345\257\271\346\211\213\357\274\232", nullptr));
+        label_5->setText(QCoreApplication::translate("netwindow", "\346\202\250\351\200\211\346\213\251\357\274\232", nullptr));
         BlackrBtn->setText(QCoreApplication::translate("netwindow", "\346\211\247\351\273\221\345\205\210\350\241\214", nullptr));
         WhiterBtn->setText(QCoreApplication::translate("netwindow", "\346\211\247\347\231\275\345\220\216\350\241\214", nullptr));
         applyGame->setText(QCoreApplication::translate("netwindow", "\347\224\263\350\257\267\345\257\271\345\261\200", nullptr));

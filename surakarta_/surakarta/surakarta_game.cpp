@@ -96,23 +96,27 @@ SurakartaMoveResponse SurakartaGame::Move(const SurakartaMove& move) {
     SurakartaIllegalMoveReason move_reason = rule_manager_->JudgeMove(move);
     // std::cout<<move_reason<<std::endl;
     auto [end_reason, winner] = rule_manager_->JudgeEnd(move_reason);
+    if(end_reason==SurakartaEndReason::ILLIGAL_MOVE)
+    {
+        SurakartaMoveResponse r(move_reason, end_reason, winner);
+        return r;
+    }
     UpdateGameInfo(move_reason, end_reason, winner); 
     int move_toID=(*board_).getPiecesID(move.to.x,move.to.y);
     int  move_fromID=(*board_).getPiecesID(move.from.x,move.from.y);
     // std::cout<<"move_fromID: "<<move_fromID<<std::endl;
     //    std::cout<<move_reason<<std::endl;
+
     if (move_reason == SurakartaIllegalMoveReason::LEGAL_NON_CAPTURE_MOVE) {
         board_->piece[move_fromID].SetPosition(move.to);
-
           board_->isBlackTurn = !board_->isBlackTurn;
-        // rule_manager_->OnUpdateBoard();
     } else if (move_reason == SurakartaIllegalMoveReason::LEGAL_CAPTURE_MOVE) {
         (*board_).piece[move_toID].SetColor(PieceColor::NONE);
         (*board_).piece[move_fromID].SetPosition(move.to);
          board_->isBlackTurn = !board_->isBlackTurn;
-        // rule_manager_->OnUpdateBoard();
     }
-     // std::cout<<"???move.from: "<< board_->piece[move_fromID].position_<<std::endl;
+
+    // std::cout<<"???move.from: "<< board_->piece[move_fromID].position_<<std::endl;
     SurakartaMoveResponse response(move_reason, end_reason, winner);
     return response;
 }

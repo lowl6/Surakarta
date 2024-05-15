@@ -17,9 +17,9 @@ netwindow::netwindow(QWidget *parent)
     socket = new NetworkSocket(new QTcpSocket(this), this);
 
     connect(socket->base(), &QAbstractSocket::disconnected,this, [=]() {
-       have_connected=false;
-       QMessageBox::critical(this, tr("Connection lost"), tr("Connection to server has closed"));
-       ui->groupBox->hide();
+        have_connected=false;
+        QMessageBox::critical(this, tr("Connection lost"), tr("Connection to server has closed"));
+        ui->groupBox->hide();
     });
 
     connect(socket->base(), &QTcpSocket::connected, this, &netwindow::connected_successfully);
@@ -75,8 +75,57 @@ void netwindow::sendMessage() {
 
 void netwindow::receiveMessage(NetworkData data) {
     ui->receive_edit->setText(data.data2);
+    switch (data.op) {
+    case OPCODE::MOVE_OP:
+        move_op(data);
+        break;
+    case OPCODE::READY_OP:
+        ready_op(data);
+        break;
+    case OPCODE::REJECT_OP:
+        reject_op(data);
+        break;
+    case OPCODE::END_OP:
+        end_op(data);
+        break;
+    default:
+        break;
+    }
 }
+void netwindow::move_op(NetworkData data)
+{
+    SurakartaPosition from=board->Qsting2pos(data.data1);
+    SurakartaPosition to=board->Qsting2pos(data.data2);
+    SurakartaMove move(from, to, game->game_info_->current_player_);
+    game->Move(move);
+    ui->receive_edit->clear();
+    update();
+}
+void netwindow::ready_op(NetworkData data)
+{
 
+    ui->opponenter_name->setText(data.data1);
+    ui->room->setText(data.data3);
+    if(data.data2=='0')
+    {
+        on_BlackrBtn_clicked(true);
+        msg.information(this, tr("开始了！"), tr("你执黑先行！"));
+    }
+    else
+    {
+        on_WhiterBtn_clicked(true);
+        msg.information(this, tr("开始了！"), tr("你执白后行！"));
+    }
+
+}
+void netwindow::reject_op(NetworkData data)
+{
+    msg.information(this,tr("对局申请失败"),tr("申请失败原因：").arg(data.data2));
+}
+void netwindow::end_op(NetworkData data)
+{
+    msg.information(this,tr("对局结束"),tr("EndReason:").arg(data.data2));
+}
 void netwindow::on_restart_clicked()
 {
     if(!have_connected)
@@ -104,9 +153,9 @@ void netwindow::on_admit_defeat_clicked()
     }
     else
     {
-        msg.setText("您认输了，再接再厉!");
+        msg.setText("您认输了，再接再厉!(ง •̀_•́)ง");
         msg.exec();
-        this->socket->send(NetworkData(OPCODE::GIVEUP_OP,"","",""));
+        this->socket->send(NetworkData(OPCODE::RESIGN_OP,"","",""));
     }
 }
 
@@ -118,6 +167,7 @@ void netwindow::mouseReleaseEvent(QMouseEvent *ev)
         return;
     }
     /*判断点击的位置是否合法（是否在棋盘坐标的棋子范围内），同时计算出对应的棋盘行列坐标*/
+
     int row, col;
     if (!getRowCol(ev->pos(), row, col))
     {
@@ -126,6 +176,12 @@ void netwindow::mouseReleaseEvent(QMouseEvent *ev)
     else if(!have_connected)
     {
         msg.setText("请先连接到服务器 :D");
+        msg.exec();
+        return;
+    }
+    else if(game->game_info_->current_player_!=game->game_info_->player)
+    {
+        msg.setText("请等待对手落子 ╮( •́ω•̀ )╭");
         msg.exec();
         return;
     }
@@ -148,8 +204,17 @@ void netwindow::mouseReleaseEvent(QMouseEvent *ev)
 
             SurakartaPosition from(board->piece[board->selectId].position_.x, board->piece[board->selectId].position_.y);
             SurakartaPosition to(row, col);
-            SurakartaMove move(from, to, game->game_info_->current_player_);
-            game->Move(move);
+            SurakartaMove move(from, to, game->game_info_->current_player_);                       
+            SurakartaMoveResponse response= game->Move(move);
+            if(!response.IsLegal())
+                return;
+            else
+            {
+                QString s_from=board->pos2Qsting(from);
+                QString s_to=board->pos2Qsting(to);
+                socket->send(NetworkData(OPCODE::MOVE_OP, s_from,s_to, ""));
+            }
+            ui->send_edit->clear();
             board->selectId = -1;
             update();
         }

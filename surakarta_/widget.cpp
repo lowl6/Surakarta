@@ -108,11 +108,12 @@ void Widget::mouseReleaseEvent(QMouseEvent *ev)
         }
         else
         {
-
             SurakartaPosition from(board->piece[board->selectId].position_.x, board->piece[board->selectId].position_.y);
             SurakartaPosition to(row, col);
             SurakartaMove move(from, to, game->game_info_->current_player_);
-            game->Move(move);
+            SurakartaMoveResponse response= game->Move(move);
+            if(!response.IsLegal())
+                return;
             board->selectId = -1;
             update();
         }
@@ -221,7 +222,7 @@ void Widget::on_admit_defeat_clicked()
 {
     QMessageBox msgBox;
     msgBox.setWindowTitle("GAME OVER");
-    msgBox.setText("再接再厉!");
+    msgBox.setText("您认输了，再接再厉!(ง •̀_•́)ง");
     msgBox.addButton(QMessageBox::Ok);
     msgBox.setIcon(QMessageBox::Information);
     msgBox.exec();

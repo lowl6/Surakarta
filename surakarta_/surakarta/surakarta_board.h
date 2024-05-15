@@ -6,6 +6,7 @@
 // #include "surakarta_common.h"
 // #include "surakarta_game.h"
 #include <QWidget>
+#include <QString>
 #define BOARD_SIZE 6
 
 QT_BEGIN_NAMESPACE
@@ -31,6 +32,8 @@ public:
     bool IsInside(const SurakartaPosition& position) const {
         return position.x < BOARD_SIZE && position.y < BOARD_SIZE;
     }
+    SurakartaPosition Qsting2pos(QString s);
+    QString pos2Qsting(SurakartaPosition p);
     unsigned int boardSize;
 
 
