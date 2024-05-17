@@ -19,6 +19,7 @@ netwindow::netwindow(QWidget *parent)
     connect(socket->base(), &QAbstractSocket::disconnected,this, [=]() {
         have_connected=false;
         QMessageBox::critical(this, tr("Connection lost"), tr("Connection to server has closed"));
+        disconnectFromServer();
         ui->groupBox->hide();
     });
 
@@ -59,6 +60,8 @@ void netwindow::disconnectFromServer() {
     socket->send(NetworkData(OPCODE::LEAVE_OP, "", "", ""));
     socket->bye();
     have_connected=false;
+    ui->connect_button->setEnabled(true);
+    ui->disconnect_button->setEnabled(true);
     ui->connect_button->setEnabled(true);
     ui->disconnect_button->setEnabled(false);
     ui->send_button->setEnabled(false);
@@ -103,9 +106,11 @@ void netwindow::move_op(NetworkData data)
 }
 void netwindow::ready_op(NetworkData data)
 {
-
+    std::cout<<"ready!!!!";
     ui->opponenter_name->setText(data.data1);
     ui->room->setText(data.data3);
+    ui->BlackrBtn->setEnabled(false);
+    ui->WhiterBtn->setEnabled(false);
     if(data.data2=='0')
     {
         on_BlackrBtn_clicked(true);
@@ -239,9 +244,6 @@ void netwindow::on_WhiterBtn_clicked(bool checked)
         game->game_info_->player=SurakartaPlayer::BLACK;
 }
 
-
-
-
 void netwindow::on_applyGame_clicked()
 {
     // 将枚举变量转换为整数
@@ -249,7 +251,7 @@ void netwindow::on_applyGame_clicked()
     // 将整数转换为 QString 类型的字符串
     QString colorString = QString::number(colorInt);
     QString roomSting= ui->room->text();
-    socket->send(NetworkData(OPCODE::READY_OP, "team5", colorString, roomSting));
+    socket->send(NetworkData(OPCODE::READY_OP, "team_5", colorString, roomSting));
     return;
 }
 
