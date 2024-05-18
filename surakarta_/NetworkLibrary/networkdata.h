@@ -5,16 +5,13 @@
 
 enum class OPCODE : int {
     READY_OP = 200000,
+    REJECT_OP,
     MOVE_OP,
-    GIVEUP_OP,
     TIMEOUT_END_OP,
-    SUICIDE_END_OP,
-    GIVEUP_END_OP,
     LEAVE_OP,
     CHAT_OP,
     END_OP,
-    RESIGN_OP,
-    REJECT_OP
+    RESIGN_OP
 };
 
 class InvalidMessage : public QException {

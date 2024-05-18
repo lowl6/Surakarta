@@ -16,7 +16,10 @@ Widget::~Widget()
 {
     delete ui;
 }
-
+// void Widget::hidentb()
+// {
+//     ui->restart->setVisible(false);
+// }
 inline QPoint Widget::center(unsigned int x, unsigned int y)
 {
     QPoint ret;
@@ -113,7 +116,10 @@ void Widget::mouseReleaseEvent(QMouseEvent *ev)
             SurakartaMove move(from, to, game->game_info_->current_player_);
             SurakartaMoveResponse response= game->Move(move);
             if(!response.IsLegal())
-                return;
+            {
+                std::cout<<"戳啦";
+                std::cout<<response.move_reason_;
+                return;}
             board->selectId = -1;
             update();
         }
@@ -142,6 +148,7 @@ void Widget::drawPiece(QPainter &painter, int id)
             painter.drawEllipse(center(id), board->piece_radius, board->piece_radius);
         }
     }
+
 }
 
 void Widget::paintEvent(QPaintEvent *event)
@@ -180,6 +187,20 @@ void Widget::paintEvent(QPaintEvent *event)
     {
         drawPiece(painter, i);
     }
+    if(ui->showAllgoalbtn->isChecked()&& board->selectId!=-1)
+    {
+        QPainter painter(this);
+
+        std::vector<SurakartaPosition> AllLegalTarget=game->rule_manager_->GetAllLegalTarget(board->piece[board->selectId].position_);
+        painter.setOpacity(0.2);
+        painter.setBrush(Qt::cyan);
+        double r= 1*board->piece_radius;
+        for(auto i:AllLegalTarget)
+        {
+            painter.drawEllipse(QPointF(center(i.x, i.y)), r,r);
+        }
+    }
+
 }
 void Widget::repaintEvent(QPaintEvent *)
 {
@@ -226,5 +247,12 @@ void Widget::on_admit_defeat_clicked()
     msgBox.addButton(QMessageBox::Ok);
     msgBox.setIcon(QMessageBox::Information);
     msgBox.exec();
+    on_restart_clicked();
 }
+
+
+
+
+
+
 

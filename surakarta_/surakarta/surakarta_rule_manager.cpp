@@ -10,30 +10,18 @@ void SurakartaRuleManager::OnUpdateBoard() {
     // A more delicate way is to use Qt's signal and slot mechanism, but that's the advanced part.
 }
 SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& move) {
-    // TODO: Implement this function.
-    // OUT_OF_BOARD:1
-    // if (move.player != game_info_->current_player_) {
-    //     return SurakartaIllegalMoveReason::NOT_PLAYER_TURN;
-    // }
-    // if (move.from.x >= BOARD_SIZE || move.from.y >= BOARD_SIZE || move.to.x >= BOARD_SIZE || move.to.y >= BOARD_SIZE)
-    //     return SurakartaIllegalMoveReason::OUT_OF_BOARD;
-    // std::vector<SurakartaPosition> loopin, loopout, loopboth;
-    // int move_fromID=(*board_).getPiecesID(move.from.x,move.from.y);
-    // SurakartaPosition move_toPosition(move.to.x,move.to.y);
-    // std::cout<<"move_from:"<<move.from<<std::endl;
 
-    // PieceColor move_fromColor = board_->xy2PositionColor(move.from.x,move.from.y);
-    PieceColor move_toColor = board_->xy2PositionColor(move.to.x,move.to.y);
+    if(move.from.x<0||move.from.x>=board_size_||move.from.y<0||move.from.y>=board_size_||move.to.x<0||move.to.x>=board_size_||move.to.x<0||move.to.x>=board_size_)
+        return SurakartaIllegalMoveReason::OUT_OF_BOARD;
+      PieceColor move_toColor = board_->xy2PositionColor(move.to.x,move.to.y);
+      PieceColor move_fromColor = board_->xy2PositionColor(move.from.x,move.from.y);
+    if(move_fromColor==PieceColor::NONE)
+          return SurakartaIllegalMoveReason::NOT_PIECE;
+    if(move.player!=game_info_->current_player_)
+       return SurakartaIllegalMoveReason::NOT_PLAYER_PIECE;
 
-    // std::cout<<"move_from："<<move.from<<" move_to :"<<move.to<<std::endl;
-    // std::cout<<"From "<<move_fromColor<<" move_toColor "<<move_toColor<<std::endl;
-    // NOT_PIECE:2
-    // if (move_fromColor == PieceColor::NONE)
-    //     return SurakartaIllegalMoveReason::NOT_PIECE;
-    // // NOT_PLAYER_PIECE:3
-    // if (move_fromColor != game_info_->current_player_)
-    //     return SurakartaIllegalMoveReason::NOT_PLAYER_PIECE;
-    // capure:
+
+
     bool flag = false;
     if (move_toColor != PieceColor::NONE) {
         if (move_toColor == game_info_->current_player_)
@@ -502,7 +490,7 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
     else
         return SurakartaIllegalMoveReason::ILLIGAL_NON_CAPTURE_MOVE;
 
-    return SurakartaIllegalMoveReason::LEGAL;
+    return SurakartaIllegalMoveReason::ILLIGAL;
 }
 
 std::pair<SurakartaEndReason, SurakartaPlayer> SurakartaRuleManager::JudgeEnd(const SurakartaIllegalMoveReason reason) {
@@ -570,34 +558,35 @@ std::pair<SurakartaEndReason, SurakartaPlayer> SurakartaRuleManager::JudgeEnd(co
     return std::make_pair(SurakartaEndReason::NONE, SurakartaPlayer::NONE);
 }
 
-std::unique_ptr<std::vector<SurakartaPosition>> SurakartaRuleManager::GetAllLegalTarget(const SurakartaPosition postion) {
-    // TODO:
-    // We don't test this function, you don't need to implement this function if you don't need it.
+std::vector<SurakartaPosition> SurakartaRuleManager::GetAllLegalTarget(const SurakartaPosition postion) {
+
     SurakartaMove possible_steps_tmp;
     std::vector<SurakartaPosition> AllLegalTarget, current_player_, last_player_;
-    // 吃子
-    //有问题，请修改后食用
+    possible_steps_tmp.player=game_info_->current_player_;
+    //获取所棋子的位置
     for (unsigned int i = 0; i < board_size_; i++) {
         for (unsigned int j = 0; j < board_size_; j++) {
             SurakartaPosition position = {i, j};
             int pieceID=(*board_).getPiecesID(i,j);
-            PieceColor color = (*board_).piece[pieceID].color_;
-            if (color == game_info_->current_player_) {
-                current_player_.push_back(position);
-            } else if ( color== PieceColor::NONE) {
-                last_player_.push_back(position);
+            if(pieceID<24&&pieceID>=0)
+            {
+                PieceColor color = (*board_).piece[pieceID].color_;
+                if (color == game_info_->current_player_) {
+                    current_player_.push_back(position);
+                } else if ( color!= PieceColor::NONE) {
+                    last_player_.push_back(position);
+                }
             }
         }
     }
-    for (unsigned int i = 0; i < current_player_.size(); i++) {
-        possible_steps_tmp.from = current_player_[i];
-        for (unsigned int j = 0; j < last_player_.size(); j++) {
-            possible_steps_tmp.to = last_player_[j];
+        possible_steps_tmp.from = postion;
+        for (auto j:last_player_) {
+            possible_steps_tmp.to = j;
             if (JudgeMove(possible_steps_tmp) == SurakartaIllegalMoveReason::LEGAL_CAPTURE_MOVE) {
                 AllLegalTarget.push_back(possible_steps_tmp.to);
             }
         }
-    }
+
     for (int j = 1; j >= -1; j--) {
         for (int t = 1; t >= -1; t--) {
             if (j == 0 && t == 0)
@@ -605,10 +594,12 @@ std::unique_ptr<std::vector<SurakartaPosition>> SurakartaRuleManager::GetAllLega
             possible_steps_tmp.to = postion;
             possible_steps_tmp.to.x += j;
             possible_steps_tmp.to.y += t;
+            if( possible_steps_tmp.to.x>=BOARD_SIZE|| possible_steps_tmp.to.y>=BOARD_SIZE|| possible_steps_tmp.to.x<0|| possible_steps_tmp.to.y<0)
+                continue;
             if ((JudgeMove(possible_steps_tmp)) == SurakartaIllegalMoveReason::LEGAL_NON_CAPTURE_MOVE) {
                 AllLegalTarget.push_back(possible_steps_tmp.to);
             }
         }
     }
-    return std::make_unique<std::vector<SurakartaPosition>>(AllLegalTarget);
+    return AllLegalTarget;
 }

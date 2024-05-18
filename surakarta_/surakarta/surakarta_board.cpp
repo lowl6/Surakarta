@@ -39,6 +39,7 @@ SurakartaPosition SurakartaBoard::Qsting2pos(QString s) {
 
     p.x = letter.toLatin1() - 'A' + 1;
     p.y = number.toLatin1() - '0';
+    return p;
 }
 QString SurakartaBoard::pos2Qsting(SurakartaPosition p)
 {

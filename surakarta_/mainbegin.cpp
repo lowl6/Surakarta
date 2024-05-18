@@ -18,8 +18,8 @@ mainbegin::~mainbegin()
 
 void mainbegin::on_online_clicked()
 {
-    netwindow *chessboard=new netwindow;
-    chessboard->show();
+    netwindow *net=new netwindow;
+    net->show();
     this->close();
 
 }

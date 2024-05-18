@@ -47,7 +47,7 @@ public:
      * @brief Get all legal target positions of a piece.
      * @param postion The position of the piece.
      */
-    virtual std::unique_ptr<std::vector<SurakartaPosition>> GetAllLegalTarget(const SurakartaPosition postion);
+    virtual std::vector<SurakartaPosition> GetAllLegalTarget(const SurakartaPosition postion);
 
     //    protected:
     //SurakartaGame game_;

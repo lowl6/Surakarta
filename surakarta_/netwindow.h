@@ -1,6 +1,7 @@
 #ifndef NETWINDOW_H
 #define NETWINDOW_H
 #include "widget.h"
+#include "ui_widget.h"
 #include "NetworkLibrary/networkdata.h"
 #include "NetworkLibrary/networksocket.h"
 #include <QWidget>
@@ -8,6 +9,7 @@
 
 namespace Ui {
 class netwindow;
+
 }
 
 class netwindow : public Widget
@@ -15,7 +17,7 @@ class netwindow : public Widget
     Q_OBJECT
 
 public:
-    explicit netwindow(QWidget *parent = nullptr);
+    explicit netwindow(Widget *parent = nullptr);
     void on_restart_clicked() override;
     void on_admit_defeat_clicked() override;
     void mouseReleaseEvent(QMouseEvent*ev) override;
@@ -28,10 +30,13 @@ private:
     bool have_connected=false;
     Ui::netwindow *ui;
     QMessageBox msg;
+    QPushButton *restart;
     void move_op(NetworkData data);
     void ready_op(NetworkData data);
     void reject_op(NetworkData data);
     void end_op(NetworkData data);
+    void chat_op(NetworkData data);
+    Widget *parent;
 private slots:
     void connected_successfully();
     void connectToServer();

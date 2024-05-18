@@ -13,41 +13,54 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <widget class="QPushButton" name="admit_defeat">
+  <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>440</y>
+     <x>570</x>
+     <y>380</y>
      <width>171</width>
-     <height>31</height>
+     <height>145</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <bold>true</bold>
-    </font>
+   <property name="title">
+    <string>GroupBox</string>
    </property>
-   <property name="text">
-    <string>认输</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="restart">
-   <property name="geometry">
-    <rect>
-     <x>540</x>
-     <y>490</y>
-     <width>171</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>再来一局</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QRadioButton" name="showAllgoalbtn">
+      <property name="text">
+       <string>获取所有可走位置</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="admit_defeat">
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>认输</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="restart">
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>再来一局</string>
+      </property>
+      <property name="autoDefault">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

@@ -31,12 +31,11 @@ public:
     bool canSelect(int id);
     void repaintEvent(QPaintEvent *);
     ~Widget();
-
-private:
     Ui::Widget *ui;
-
+   // void hidentb();
 public slots:
    virtual void on_restart_clicked();
    virtual void on_admit_defeat_clicked();
+
 };
 #endif // WIDGET_H

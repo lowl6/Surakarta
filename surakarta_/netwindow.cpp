@@ -1,10 +1,10 @@
 #include "netwindow.h"
 #include "ui_netwindow.h"
-
-netwindow::netwindow(QWidget *parent)
+netwindow::netwindow(Widget *parent)
     : Widget(parent)
     , ui(new Ui::netwindow)
 {
+
     ui->setupUi(this);
     ui->ip_edit->setText(ip);
     ui->port_edit->setText(QString::number(port));
@@ -13,14 +13,14 @@ netwindow::netwindow(QWidget *parent)
     ui->receive_edit->setReadOnly(true);
     ui->BlackrBtn->setChecked(true);
     ui->groupBox->hide();
-
+   // parent->hidentb();
     socket = new NetworkSocket(new QTcpSocket(this), this);
-
     connect(socket->base(), &QAbstractSocket::disconnected,this, [=]() {
         have_connected=false;
         QMessageBox::critical(this, tr("Connection lost"), tr("Connection to server has closed"));
         disconnectFromServer();
         ui->groupBox->hide();
+
     });
 
     connect(socket->base(), &QTcpSocket::connected, this, &netwindow::connected_successfully);
@@ -67,6 +67,8 @@ void netwindow::disconnectFromServer() {
     ui->send_button->setEnabled(false);
     ui->port_edit->setReadOnly(false);
     ui->ip_edit->setReadOnly(false);
+    ui->BlackrBtn->setEnabled(true);
+    ui->WhiterBtn->setEnabled(true);
     ui->ip_edit->setText(ip);
 }
 
@@ -75,7 +77,7 @@ void netwindow::sendMessage() {
     socket->send(NetworkData(OPCODE::CHAT_OP, "", message, ""));
     ui->send_edit->clear();
 }
-
+//接收各种信息后的处理
 void netwindow::receiveMessage(NetworkData data) {
     ui->receive_edit->setText(data.data2);
     switch (data.op) {
@@ -91,10 +93,14 @@ void netwindow::receiveMessage(NetworkData data) {
     case OPCODE::END_OP:
         end_op(data);
         break;
+    case OPCODE::CHAT_OP:
+
+        chat_op(data);
     default:
         break;
     }
 }
+//各种op的实现
 void netwindow::move_op(NetworkData data)
 {
     SurakartaPosition from=board->Qsting2pos(data.data1);
@@ -130,7 +136,17 @@ void netwindow::reject_op(NetworkData data)
 void netwindow::end_op(NetworkData data)
 {
     msg.information(this,tr("对局结束"),tr("EndReason:").arg(data.data2));
+    on_restart_clicked();
+    ui->BlackrBtn->setEnabled(true);
+    ui->WhiterBtn->setEnabled(true);
 }
+void netwindow::chat_op(NetworkData data)
+{
+    ui->receive_edit->clear();
+    ui->receive_edit->setText(data.data1);
+}
+
+//再来一局
 void netwindow::on_restart_clicked()
 {
     if(!have_connected)
@@ -152,7 +168,7 @@ void netwindow::on_admit_defeat_clicked()
 {   if(!have_connected)
     {
 
-        msg.setText("请先连接到服务器 ~_~");
+        msg.setText("你向谁认输啊,请先连接到服务器 ~_~");
         msg.exec();
         return;
     }
@@ -161,6 +177,7 @@ void netwindow::on_admit_defeat_clicked()
         msg.setText("您认输了，再接再厉!(ง •̀_•́)ง");
         msg.exec();
         this->socket->send(NetworkData(OPCODE::RESIGN_OP,"","",""));
+        on_restart_clicked();
     }
 }
 
