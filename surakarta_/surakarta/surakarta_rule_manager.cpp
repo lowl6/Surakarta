@@ -13,12 +13,15 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
 
     if(move.from.x<0||move.from.x>=board_size_||move.from.y<0||move.from.y>=board_size_||move.to.x<0||move.to.x>=board_size_||move.to.x<0||move.to.x>=board_size_)
         return SurakartaIllegalMoveReason::OUT_OF_BOARD;
-      PieceColor move_toColor = board_->xy2PositionColor(move.to.x,move.to.y);
-      PieceColor move_fromColor = board_->xy2PositionColor(move.from.x,move.from.y);
+    PieceColor move_toColor = board_->xy2PositionColor(move.to.x,move.to.y);
+    PieceColor move_fromColor = board_->xy2PositionColor(move.from.x,move.from.y);
     if(move_fromColor==PieceColor::NONE)
-          return SurakartaIllegalMoveReason::NOT_PIECE;
+        return SurakartaIllegalMoveReason::NOT_PIECE;
+    if (move_fromColor != game_info_->current_player_)
+        return SurakartaIllegalMoveReason::NOT_PLAYER_PIECE;
     if(move.player!=game_info_->current_player_)
-       return SurakartaIllegalMoveReason::NOT_PLAYER_PIECE;
+        return SurakartaIllegalMoveReason::NOT_PLAYER_TURN;
+
 
 
 
@@ -44,21 +47,13 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 if (i < BOARD_SIZE - 1) {
                     if (piece_id ==-1)
                         continue;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        continue;
                     else
                         break;
-                } else if (i == BOARD_SIZE - 1) {
-                    bool f=false;
-                    if(piece_id ==-1)
-                        f=true;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        f=true;
-                    if(f)
-                    { SurakartaPosition newPosition(i, move.from.y);
-                        interface.push_back(newPosition);}
-                    break;
-                } else
+                } else if (i == BOARD_SIZE - 1&&piece_id ==-1) {
+                    SurakartaPosition newPosition(i, move.from.y);
+                    interface.push_back(newPosition);
+                    break;}
+                else
                     break;
             }
             i = move.from.x;
@@ -72,21 +67,14 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 if (i > 0 && i < BOARD_SIZE) {
                     if (piece_id ==-1)
                         continue;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        continue;
                     else
                         break;
-                } else if (i == 0 ) {
-                    bool f=false;
-                    if(piece_id ==-1)
-                        f=true;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        f=true;
-                    if(f)
-                    { SurakartaPosition newPosition(i, move.from.y);
-                        interface.push_back(newPosition);}
+                } else if (i == 0 &&piece_id ==-1) {
+                    SurakartaPosition newPosition(i, move.from.y);
+                    interface.push_back(newPosition);
                     break;
-                } else
+                }
+                else
                     break;
             }
         }
@@ -102,23 +90,15 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 if (i < BOARD_SIZE - 1) {
                     if (piece_id ==-1)
                         continue;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        continue;
                     else
                         break;
                 }
-                else if (i == BOARD_SIZE - 1) {
-                    bool f=false;
-                    if(piece_id ==-1)
-                        f=true;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        f=true;
-                    if (f) {
-                        SurakartaPosition newPosition(move.from.x, i);
-                        interface.push_back(newPosition);
-                    }
+                else if (i == BOARD_SIZE - 1&&piece_id ==-1) {
+                    SurakartaPosition newPosition(move.from.x, i);
+                    interface.push_back(newPosition);
                     break;
                 }
+                else break;
             }
             i = move.from.y;
             while (1) {
@@ -131,22 +111,14 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 if (i > 0 && i < BOARD_SIZE) {
                     if (piece_id ==-1)
                         continue;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        continue;
                     else
                         break;
-                } else if (i == 0) {
-                    bool f=false;
-                    if(piece_id ==-1)
-                        f=true;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        f=true;
-                    if (f) {
-                        SurakartaPosition newPosition(move.from.x, i);
-                        interface.push_back(newPosition);
-                    }
+                } else if (i == 0&&piece_id ==-1) {
+                    SurakartaPosition newPosition(move.from.x, i);
+                    interface.push_back(newPosition);
                     break;
                 }
+                else break;
             }
         }
         // 寻找通路：Accessible_xRoad, Accessible_yRoad;
@@ -349,21 +321,13 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 }
                 int piece_id=(*board_).getPiecesID(++i,move.to.y);
                 if (i < BOARD_SIZE - 1) {
-                    if (piece_id ==-1)
-                        continue;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
+                    if (piece_id ==-1|| (move.from.x == i && move.from.y == move.to.y))
                         continue;
                     else
                         break;
-                } else if (i == BOARD_SIZE - 1) {
-                    bool f=false;
-                    if(piece_id ==-1)
-                        f=true;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        f=true;
-                    if(f)
-                    { SurakartaPosition newPosition(i, move.to.y);
-                        interface_to.push_back(newPosition);}
+                } else if (i == BOARD_SIZE - 1&&(piece_id ==-1||(move.from.x == i && move.from.y == move.to.y))) {
+                    SurakartaPosition newPosition(i, move.to.y);
+                    interface_to.push_back(newPosition);
                     break;
                 } else
                     break;
@@ -377,21 +341,13 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 }
                 int piece_id=(*board_).getPiecesID(--i,move.to.y);
                 if (i > 0 && i < BOARD_SIZE) {
-                    if (piece_id ==-1)
-                        continue;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
+                    if (piece_id ==-1 || (move.from.x == i && move.from.y == move.to.y))
                         continue;
                     else
                         break;
-                } else if (i == 0 ) {
-                    bool f=false;
-                    if(piece_id ==-1)
-                        f=true;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        f=true;
-                    if(f)
-                    { SurakartaPosition newPosition(i, move.to.y);
-                        interface_to.push_back(newPosition);}
+                } else if (i == 0  && (piece_id ==-1|| (move.from.x == i && move.from.y == move.to.y))) {
+                    SurakartaPosition newPosition(i, move.to.y);
+                    interface_to.push_back(newPosition);
                     break;
                 } else
                     break;
@@ -407,25 +363,17 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 }
                 int piece_id=(*board_).getPiecesID(move.to.x,++i);
                 if (i < BOARD_SIZE - 1) {
-                    if (piece_id ==-1)
-                        continue;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
+                    if (piece_id ==-1|| (move.from.x == move.to.x && move.from.y == i))
                         continue;
                     else
                         break;
                 }
-                else if (i == BOARD_SIZE - 1) {
-                    bool f=false;
-                    if(piece_id ==-1)
-                        f=true;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        f=true;
-                    if (f) {
-                        SurakartaPosition newPosition(move.to.x, i);
-                        interface_to.push_back(newPosition);
-                    }
+                else if (i == BOARD_SIZE - 1&& (piece_id ==-1|| (move.from.x == move.to.x && move.from.y == i))) {
+                    SurakartaPosition newPosition(move.to.x, i);
+                    interface_to.push_back(newPosition);
                     break;
-                }
+                }else
+                    break;
             }
             i = move.to.y;
             while (1) {
@@ -436,24 +384,17 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 }
                 int piece_id=(*board_).getPiecesID(move.to.x,--i);
                 if (i > 0 && i < BOARD_SIZE) {
-                    if (piece_id ==-1)
-                        continue;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
+                    if (piece_id ==-1|| (move.from.x == move.to.x && move.from.y == i))
                         continue;
                     else
                         break;
-                } else if (i == 0) {
-                    bool f=false;
-                    if(piece_id ==-1)
-                        f=true;
-                    else if((*board_).piece[piece_id].color_==PieceColor::NONE)
-                        f=true;
-                    if (f) {
-                        SurakartaPosition newPosition(move.to.x, i);
-                        interface_to.push_back(newPosition);
-                    }
+                } else if (i == 0&&(piece_id ==-1 || (move.from.x == move.to.x && move.from.y == i))){
+                    SurakartaPosition newPosition(move.to.x, i);
+                    interface_to.push_back(newPosition);
                     break;
                 }
+                else
+                    break;
             }
         }
         //////// check
@@ -490,7 +431,7 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
     else
         return SurakartaIllegalMoveReason::ILLIGAL_NON_CAPTURE_MOVE;
 
-    return SurakartaIllegalMoveReason::ILLIGAL;
+    return SurakartaIllegalMoveReason::LEGAL;
 }
 
 std::pair<SurakartaEndReason, SurakartaPlayer> SurakartaRuleManager::JudgeEnd(const SurakartaIllegalMoveReason reason) {
@@ -517,11 +458,15 @@ std::pair<SurakartaEndReason, SurakartaPlayer> SurakartaRuleManager::JudgeEnd(co
     for (unsigned int i = 0; i < board_size_; i++) {
         for (unsigned int j = 0; j < board_size_; j++) {
             int pieceID=(*board_).getPiecesID(i,j);
-            PieceColor color = (*board_).piece[pieceID].color_;
-            if (color == PieceColor::BLACK) {
-                sum_black++;
-            } else if (color == PieceColor::WHITE) {
-                sum_white++;
+            if(pieceID==-1)
+                continue;
+            else  {
+                PieceColor color = (*board_).piece[pieceID].color_;
+                if (color == PieceColor::BLACK) {
+                    sum_black++;
+                } else if (color == PieceColor::WHITE) {
+                    sum_white++;
+                }
             }
         }
     }  // get the num of both color sides
@@ -579,13 +524,13 @@ std::vector<SurakartaPosition> SurakartaRuleManager::GetAllLegalTarget(const Sur
             }
         }
     }
-        possible_steps_tmp.from = postion;
-        for (auto j:last_player_) {
-            possible_steps_tmp.to = j;
-            if (JudgeMove(possible_steps_tmp) == SurakartaIllegalMoveReason::LEGAL_CAPTURE_MOVE) {
-                AllLegalTarget.push_back(possible_steps_tmp.to);
-            }
+    possible_steps_tmp.from = postion;
+    for (auto j:last_player_) {
+        possible_steps_tmp.to = j;
+        if (JudgeMove(possible_steps_tmp) == SurakartaIllegalMoveReason::LEGAL_CAPTURE_MOVE) {
+            AllLegalTarget.push_back(possible_steps_tmp.to);
         }
+    }
 
     for (int j = 1; j >= -1; j--) {
         for (int t = 1; t >= -1; t--) {

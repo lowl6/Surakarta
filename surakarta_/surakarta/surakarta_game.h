@@ -59,8 +59,8 @@ public:
     {
         connect(blackTimerId, &QTimer::timeout, this, &SurakartaGame::handle_timeout);
         connect(whiteTimerId, &QTimer::timeout, this, &SurakartaGame::handle_timeout);
-        blackTimerId->setInterval(10000); // 设置计时器间隔为10秒
-        whiteTimerId->setInterval(10000); // 设置计时器间隔为10秒
+        blackTimerId->setInterval(20000); // 设置计时器间隔为20秒
+        whiteTimerId->setInterval(20000); // 设置计时器间隔为20秒
     }
 
     ~SurakartaGame() {
