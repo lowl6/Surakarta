@@ -76,9 +76,19 @@ void Widget::toSelectPieces(int id)
 }
 bool Widget::canSelect(int id)
 {
+    if(id<0||id>=24)
+        return false;
     if (board->piece[id].color_ == PieceColor::NONE)
         return false;
-    return board->isBlackTurn == (board->piece[id].color_ == PieceColor::BLACK);
+    if(board->isBlackTurn)
+    {
+        if(board->piece[id].color_ == PieceColor::BLACK)
+            return true;
+    }
+    else if(board->piece[id].color_==PieceColor::WHITE)
+        return true;
+    return false;
+
 }
 
 void Widget::mouseReleaseEvent(QMouseEvent *ev)
@@ -98,15 +108,13 @@ void Widget::mouseReleaseEvent(QMouseEvent *ev)
     int id = board->getPiecesID(row, col);
     if (board->selectId == -1)
     {
-        /*选择棋子*/
+        /*选择棋子修改selectId*/
         toSelectPieces(id);
     }
     else
     {
-        if (board->piece[board->getPiecesID(row, col)].color_ == board->piece[board->selectId].color_)
+        if (board->piece[id].color_ == board->piece[board->selectId].color_)
         {
-
-            id = board->getPiecesID(row, col);
             toSelectPieces(id);
         }
         else
@@ -117,9 +125,8 @@ void Widget::mouseReleaseEvent(QMouseEvent *ev)
             SurakartaMoveResponse response= game->Move(move);
             if(!response.IsLegal())
             {
-                std::cout<<"戳啦";
-                std::cout<<response.move_reason_;
-                return;}
+                return;
+            }
             board->selectId = -1;
             update();
         }
@@ -128,24 +135,25 @@ void Widget::mouseReleaseEvent(QMouseEvent *ev)
 // 与显示到窗口中有关的函数
 void Widget::drawPiece(QPainter &painter, int id)
 {
+
     if (board->piece[id].color_ == PieceColor::NONE)
         return;
     if (id == board->selectId)
     {
         painter.setBrush(Qt::gray);
-        painter.drawEllipse(center(id), board->piece_radius, board->piece_radius);
+        painter.drawEllipse(QPointF(center(id)), board->piece_radius, board->piece_radius);
     }
     else
     {
         if (board->piece[id].color_ == PieceColor::WHITE)
         {
             painter.setBrush(Qt::white);
-            painter.drawEllipse(center(id), board->piece_radius, board->piece_radius);
+            painter.drawEllipse(QPointF(center(id)), board->piece_radius, board->piece_radius);
         }
         else if (board->piece[id].color_ == PieceColor::BLACK)
         {
             painter.setBrush(Qt::black);
-            painter.drawEllipse(center(id), board->piece_radius, board->piece_radius);
+            painter.drawEllipse(QPointF(center(id)), board->piece_radius, board->piece_radius);
         }
     }
 
@@ -194,7 +202,7 @@ void Widget::paintEvent(QPaintEvent *event)
         std::vector<SurakartaPosition> AllLegalTarget=game->rule_manager_->GetAllLegalTarget(board->piece[board->selectId].position_);
         painter.setOpacity(0.2);
         painter.setBrush(Qt::cyan);
-        double r= 1*board->piece_radius;
+        double r= board->piece_radius;
         for(auto i:AllLegalTarget)
         {
             painter.drawEllipse(QPointF(center(i.x, i.y)), r,r);
@@ -202,40 +210,48 @@ void Widget::paintEvent(QPaintEvent *event)
     }
 
 }
-void Widget::repaintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-    QPen pen;
-    pen.setWidth(3);
-    painter.setPen(pen);
+// void Widget::repaintEvent(QPaintEvent *)
+// {
+//     QPainter painter(this);
+//     QPen pen;
+//     pen.setWidth(3);
+//     painter.setPen(pen);
 
-    // 画竖线
-    for (int i = board->cell_width; i <= 6 * board->cell_width; i += board->cell_width)
-    {
-        painter.drawLine(QPoint(i + board->cell_width, board->cell_width * 2), QPoint(i + board->cell_width, board->cell_width * 7));
-    }
-    // 画横线
-    for (int i = board->cell_width; i <= board->cell_width * 6; i += board->cell_width)
-    {
-        painter.drawLine(QPoint(board->cell_width * 2, i + board->cell_width), QPoint(7 * board->cell_width, i + board->cell_width));
-    }
-    // 画外旋线
-    painter.drawArc(board->cell_width, board->cell_width, 2 * board->cell_width, 2 * board->cell_width, 0, board->cell_width * 27 / 5 * 16);
-    painter.drawArc(0, 0, 4 * board->cell_width, 4 * board->cell_width, 0, board->cell_width * 27 / 5 * 16);
-    painter.drawArc(6 * board->cell_width, board->cell_width, 2 * board->cell_width, 2 * board->cell_width, board->cell_width * 27 / 5 * 16, board->cell_width * 27 / 5 * 16);
-    painter.drawArc(board->cell_width * 5, 0, 4 * board->cell_width, 4 * board->cell_width, board->cell_width * 27 / 5 * 16, board->cell_width * 27 / 5 * 16);
-    painter.drawArc(board->cell_width, 6 * board->cell_width, 2 * board->cell_width, 2 * board->cell_width, 90 * 16, board->cell_width * 27 / 5 * 16);
-    painter.drawArc(0, 5 * board->cell_width, 4 * board->cell_width, 4 * board->cell_width, board->cell_width * 9 / 5 * 16, board->cell_width * 27 / 5 * 16);
-    painter.drawArc(6 * board->cell_width, 6 * board->cell_width, 2 * board->cell_width, 2 * board->cell_width, board->cell_width * 18 / 5 * 16, board->cell_width * 27 / 5 * 16);
-    painter.drawArc(5 * board->cell_width, 5 * board->cell_width, 4 * board->cell_width, 4 * board->cell_width, board->cell_width * 18 / 5 * 16, board->cell_width * 27 / 5 * 16);
-    // 画棋子
-}
+//     // 画竖线
+//     for (int i = board->cell_width; i <= 6 * board->cell_width; i += board->cell_width)
+//     {
+//         painter.drawLine(QPoint(i + board->cell_width, board->cell_width * 2), QPoint(i + board->cell_width, board->cell_width * 7));
+//     }
+//     // 画横线
+//     for (int i = board->cell_width; i <= board->cell_width * 6; i += board->cell_width)
+//     {
+//         painter.drawLine(QPoint(board->cell_width * 2, i + board->cell_width), QPoint(7 * board->cell_width, i + board->cell_width));
+//     }
+//     // 画外旋线
+//     painter.drawArc(board->cell_width, board->cell_width, 2 * board->cell_width, 2 * board->cell_width, 0, board->cell_width * 27 / 5 * 16);
+//     painter.drawArc(0, 0, 4 * board->cell_width, 4 * board->cell_width, 0, board->cell_width * 27 / 5 * 16);
+//     painter.drawArc(6 * board->cell_width, board->cell_width, 2 * board->cell_width, 2 * board->cell_width, board->cell_width * 27 / 5 * 16, board->cell_width * 27 / 5 * 16);
+//     painter.drawArc(board->cell_width * 5, 0, 4 * board->cell_width, 4 * board->cell_width, board->cell_width * 27 / 5 * 16, board->cell_width * 27 / 5 * 16);
+//     painter.drawArc(board->cell_width, 6 * board->cell_width, 2 * board->cell_width, 2 * board->cell_width, 90 * 16, board->cell_width * 27 / 5 * 16);
+//     painter.drawArc(0, 5 * board->cell_width, 4 * board->cell_width, 4 * board->cell_width, board->cell_width * 9 / 5 * 16, board->cell_width * 27 / 5 * 16);
+//     painter.drawArc(6 * board->cell_width, 6 * board->cell_width, 2 * board->cell_width, 2 * board->cell_width, board->cell_width * 18 / 5 * 16, board->cell_width * 27 / 5 * 16);
+//     painter.drawArc(5 * board->cell_width, 5 * board->cell_width, 4 * board->cell_width, 4 * board->cell_width, board->cell_width * 18 / 5 * 16, board->cell_width * 27 / 5 * 16);
+//     // 画棋子
+// }
 
 
 void Widget::on_restart_clicked()
 {
-    board->reset();
-    update();
+    this->hide();
+
+    // 删除当前 Widget 对象
+    delete this;
+
+    // 创建一个新的 Widget 对象
+    Widget *newWidget = new Widget();
+
+    // 显示新创建的 Widget
+    newWidget->show();
 }
 
 

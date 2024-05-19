@@ -119,12 +119,12 @@ void netwindow::ready_op(NetworkData data)
     ui->WhiterBtn->setEnabled(false);
     if(data.data2=='0')
     {
-        on_BlackrBtn_clicked(true);
+        emit ui->BlackrBtn->clicked(true);
         msg.information(this, tr("开始了！"), tr("你执黑先行！"));
     }
     else
     {
-        on_WhiterBtn_clicked(true);
+        emit ui->WhiterBtn->clicked(true);
         msg.information(this, tr("开始了！"), tr("你执白后行！"));
     }
 
@@ -250,11 +250,14 @@ void netwindow::on_BlackrBtn_clicked(bool checked)
     {
         game->game_info_->player=SurakartaPlayer::BLACK;
     }
+    else
+       game->game_info_->player=SurakartaPlayer::WHITE;
 }
 
 
 void netwindow::on_WhiterBtn_clicked(bool checked)
 {
+
     if(checked)
         game->game_info_->player=SurakartaPlayer::WHITE;
     else

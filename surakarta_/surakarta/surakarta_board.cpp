@@ -37,17 +37,17 @@ SurakartaPosition SurakartaBoard::Qsting2pos(QString s) {
         return p;
     }
 
-    p.x = letter.toLatin1() - 'A' + 1;
-    p.y = number.toLatin1() - '0';
+    p.x = letter.toLatin1() - 'A' ;
+    p.y = number.toLatin1() - '0'-1;
     return p;
 }
 QString SurakartaBoard::pos2Qsting(SurakartaPosition p)
 {
     // 将 x 转换为大写字母
-    QString letter = QChar('A' + p.x - 1);
+    QString letter = QChar('A' + p.x);
 
     // 将 y 转换为数字
-    QString number = QString::number(p.y);
+    QString number = QString::number(p.y+1);
 
     // 将字母和数字组合成 QString 返回
     return letter + number;

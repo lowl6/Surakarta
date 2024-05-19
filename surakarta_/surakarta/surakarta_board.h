@@ -1,10 +1,11 @@
 #pragma once
 // #include <memory>
-// #include <vector>
+#include <vector>
 // #include <QPainter>
 #include "surakarta_piece.h"
 // #include "surakarta_common.h"
 // #include "surakarta_game.h"
+
 #include <QWidget>
 #include <QString>
 #define BOARD_SIZE 6

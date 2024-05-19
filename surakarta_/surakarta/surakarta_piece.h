@@ -38,30 +38,9 @@ inline std::ostream& operator<<(std::ostream& os, const PieceColor& color) {
     }
     return os;
 }
-
-// inline std::istream& operator>>(std::istream& is, PieceColor& color) {
-//     char ch;
-//     is >> ch;
-//     switch (ch) {
-//     case '.':
-//         color = PieceColor::NONE;
-//         break;
-//     case 'B':
-//         color = PieceColor::BLACK;
-//         break;
-//     case 'W':
-//         color = PieceColor::WHITE;
-//         break;
-//     default:
-//         color = PieceColor::UNKNOWN;
-//         break;
-//     }
-//     return is;
-// }
-
 struct SurakartaPosition {
-    unsigned int x;
-    unsigned int y;
+    int x;
+    int y;
     SurakartaPosition(unsigned int x = 0, unsigned int y = 0)
         : x(x), y(y) {}
     friend std::ostream& operator<<(std::ostream& os, const SurakartaPosition& pos) {
