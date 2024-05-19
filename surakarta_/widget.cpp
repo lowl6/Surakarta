@@ -5,10 +5,12 @@
 Widget::Widget(QWidget *parent)
     : QWidget(parent),
     game(std::make_shared<SurakartaGame>(BOARD_SIZE, 40)), ui(new Ui::Widget)
-{  
+{
     ui->setupUi(this);
+    //按钮样式：
     ui->restart->setStyleSheet ("border:0.5px groove gray;border-radius:10px;padding:2px 4px;"     "color:rgb(0,0,0)");
     ui->admit_defeat->setStyleSheet ("border:0.5px groove gray;border-radius:10px;padding:2px 4px;"   "color:rgb(0,0,0)");
+    ui->AI->setStyleSheet ("border:0.5px groove gray;border-radius:10px;padding:2px 4px;"   "color:rgb(0,0,0)");
     QPainter painter(this);
 
 }
@@ -265,10 +267,17 @@ void Widget::on_admit_defeat_clicked()
     msgBox.exec();
     on_restart_clicked();
 }
+//将联机窗口不需要的按钮隐藏
+void Widget::Hide()
+{
+    ui->restart->hide();
+}
 
-
-
-
-
-
+void Widget::on_AI_clicked()
+{
+    SurakartaMove move=game->myAI->CalculateMove();
+    game->Move(move);
+    board->selectId = -1;
+    update();
+}
 

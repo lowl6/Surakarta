@@ -54,6 +54,11 @@ QString SurakartaBoard::pos2Qsting(SurakartaPosition p)
 }
 void SurakartaBoard:: reset()
 {
+    // current_player_ = SurakartaPlayer::BLACK;
+    // num_round_ = 1;
+    // last_captured_round_ = 0;
+    // end_reason_ = SurakartaEndReason::NONE;
+    // winner_ = SurakartaPlayer::NONE;
     selectId=-1;
     isBlackTurn=true;
     int i=0;

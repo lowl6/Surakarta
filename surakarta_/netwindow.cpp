@@ -13,14 +13,14 @@ netwindow::netwindow(Widget *parent)
     ui->receive_edit->setReadOnly(true);
     ui->BlackrBtn->setChecked(true);
     ui->groupBox->hide();
-   // parent->hidentb();
+   // Hide();
     socket = new NetworkSocket(new QTcpSocket(this), this);
+
     connect(socket->base(), &QAbstractSocket::disconnected,this, [=]() {
         have_connected=false;
         QMessageBox::critical(this, tr("Connection lost"), tr("Connection to server has closed"));
         disconnectFromServer();
         ui->groupBox->hide();
-
     });
 
     connect(socket->base(), &QTcpSocket::connected, this, &netwindow::connected_successfully);
@@ -136,9 +136,10 @@ void netwindow::reject_op(NetworkData data)
 void netwindow::end_op(NetworkData data)
 {
     msg.information(this,tr("对局结束"),tr("EndReason:").arg(data.data2));
-    on_restart_clicked();
+    board->reset();
     ui->BlackrBtn->setEnabled(true);
     ui->WhiterBtn->setEnabled(true);
+    update();
 }
 void netwindow::chat_op(NetworkData data)
 {
@@ -158,6 +159,9 @@ void netwindow::on_restart_clicked()
     }
     else
     {
+        msg.setText("就当您认输了，重开，请重新申请对局");
+        msg.exec();
+        this->socket->send(NetworkData(OPCODE::RESIGN_OP,"","",""));
         board->reset();
         update();
     }
@@ -177,7 +181,8 @@ void netwindow::on_admit_defeat_clicked()
         msg.setText("您认输了，再接再厉!(ง •̀_•́)ง");
         msg.exec();
         this->socket->send(NetworkData(OPCODE::RESIGN_OP,"","",""));
-        on_restart_clicked();
+        board->reset();
+        update();
     }
 }
 
@@ -267,9 +272,12 @@ void netwindow::on_WhiterBtn_clicked(bool checked)
 void netwindow::on_applyGame_clicked()
 {
     // 将枚举变量转换为整数
-    int colorInt = static_cast<int>(game->game_info_->player);
+    QString colorString;
+    if(game->game_info_->player==PieceColor::BLACK)
+        colorString="0";
+    else
+        colorString="1";
     // 将整数转换为 QString 类型的字符串
-    QString colorString = QString::number(colorInt);
     QString roomSting= ui->room->text();
     socket->send(NetworkData(OPCODE::READY_OP, "team_5", colorString, roomSting));
     return;

@@ -7,7 +7,6 @@
 #include<QMouseEvent>
 #include "surakarta/surakarta_game.h"
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Widget;
@@ -31,11 +30,15 @@ public:
     bool canSelect(int id);
     void repaintEvent(QPaintEvent *);
     ~Widget();
+    void Hide();
+private:
     Ui::Widget *ui;
    // void hidentb();
 public slots:
    virtual void on_restart_clicked();
    virtual void on_admit_defeat_clicked();
 
+   private slots:
+   void on_AI_clicked();
 };
 #endif // WIDGET_H

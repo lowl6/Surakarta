@@ -1,5 +1,7 @@
 QT       += core gui
 QT       +=network
+//QT += multimedia
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -19,6 +21,7 @@ SOURCES += \
     surakarta/surakarta_game.cpp \
     surakarta/surakarta_reason.cpp \
     surakarta/surakarta_rule_manager.cpp \
+    surakarta_agent/surakarta_agent_mine.cpp \
     widget.cpp
 
 HEADERS += \
@@ -35,6 +38,7 @@ HEADERS += \
     surakarta/surakarta_piece.h \
     surakarta/surakarta_reason.h \
     surakarta/surakarta_rule_manager.h \
+    surakarta_agent/surakarta_agent_mine.h \
     widget.h\
 
 FORMS += \
@@ -42,6 +46,7 @@ FORMS += \
     mainbegin.ui \
     netwindow.ui \
     surakarta/surakarta_board.ui \
+    surakarta_agent/showboard.ui \
     widget.ui
 
 # Default rules for deployment.

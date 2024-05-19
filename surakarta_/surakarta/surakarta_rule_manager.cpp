@@ -418,20 +418,20 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
             newPosition = move.from;
             newPosition.x += j;
             newPosition.y += t;
-            if (newPosition == move.to) {
+            if (newPosition == move.to&&newPosition.x<BOARD_SIZE&&newPosition.x>=0&&newPosition.y<BOARD_SIZE&&newPosition.y>=0) {
                 flag = 1;
                 break;
-            }
-            if (flag)
-                break;
+            }        
         }
+        if (flag)
+            break;
     }
     if (flag)
         return SurakartaIllegalMoveReason::LEGAL_NON_CAPTURE_MOVE;
     else
         return SurakartaIllegalMoveReason::ILLIGAL_NON_CAPTURE_MOVE;
 
-    return SurakartaIllegalMoveReason::LEGAL;
+    return SurakartaIllegalMoveReason::ILLIGAL;
 }
 
 std::pair<SurakartaEndReason, SurakartaPlayer> SurakartaRuleManager::JudgeEnd(const SurakartaIllegalMoveReason reason) {

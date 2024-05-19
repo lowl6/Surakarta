@@ -8,6 +8,7 @@ release/surakarta_board.o
 release/surakarta_game.o
 release/surakarta_reason.o
 release/surakarta_rule_manager.o
+release/surakarta_agent_mine.o
 release/widget.o
 release/qrc_imagines.o
 release/moc_networksocket.o

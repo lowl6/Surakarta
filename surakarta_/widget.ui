@@ -34,6 +34,13 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="AI">
+      <property name="text">
+       <string>AI代打</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QPushButton" name="admit_defeat">
       <property name="font">
        <font>

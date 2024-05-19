@@ -75,11 +75,11 @@ public:
     SurakartaPosition GetPosition() const { return position_; }
     PieceColor GetColor() const { return color_; }
 
-    // friend std::ostream& operator<<(std::ostream& os, const SurakartaPiece& piece) {
-    //     os << piece.color_;
-    //     return os;
-    // }
-    //    private:
+    friend std::ostream& operator<<(std::ostream& os, const SurakartaPiece& piece) {
+        os << piece.color_;
+        return os;
+    }
+      // private:
     SurakartaPosition position_;
     PieceColor color_;
 };

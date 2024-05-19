@@ -13,10 +13,10 @@ struct SurakartaMove {
         : from(from_x, from_y), to(to_x, to_y), player(player) {}
     SurakartaMove(SurakartaPosition from, SurakartaPosition to, SurakartaPlayer player)
         : from(from), to(to), player(player) {}
-    // friend std::ostream& operator<<(std::ostream& os, const SurakartaMove& move) {
-    //     os << move.from << " -> " << move.to << " (" << move.player << ")";
-    //     return os;
-    // }
+    friend std::ostream& operator<<(std::ostream& os, const SurakartaMove& move) {
+        os << move.from << " -> " << move.to << " (" << move.player << ")";
+        return os;
+    }
 };
 
 struct SurakartaGameInfo {
@@ -30,11 +30,11 @@ struct SurakartaGameInfo {
 
     SurakartaGameInfo(unsigned int max_no_capture_round = 40)
         : current_player_(SurakartaPlayer::BLACK),
-          num_round_(1),
-          last_captured_round_(0),
-          end_reason_(SurakartaEndReason::NONE),
-          winner_(SurakartaPlayer::NONE),
-          max_no_capture_round_(max_no_capture_round) {}
+        num_round_(1),
+        last_captured_round_(0),
+        end_reason_(SurakartaEndReason::NONE),
+        winner_(SurakartaPlayer::NONE),
+        max_no_capture_round_(max_no_capture_round) {}
 
     void Reset() {
         current_player_ = SurakartaPlayer::BLACK;

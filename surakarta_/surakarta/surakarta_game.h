@@ -1,10 +1,10 @@
 #pragma once
-// #include "surakarta_agent/surakarta_agent_base.h"
 #include "surakarta_common.h"
 #include "surakarta_rule_manager.h"
 #include <QTimer>
 #include <QMessageBox>
 #include <QObject>
+#include "surakarta_agent/surakarta_agent_mine.h"
 class SurakartaMoveResponse {
    public:
 
@@ -52,7 +52,7 @@ public:
         board_(std::make_shared<SurakartaBoard>(board_size)),
         game_info_(std::make_shared<SurakartaGameInfo>(max_no_capture_round)),
         rule_manager_(std::make_shared<SurakartaRuleManager>(board_, game_info_)),
-        // agent_(std::make_shared<SurakartaAgentBase>(board_, game_info_, rule_manager_)) {}
+        myAI(std::make_shared<SurakartaAgentMine>(board_, game_info_, rule_manager_)) ,
         checktimeout(false),
         blackTimerId(new QTimer(this)),
         whiteTimerId(new QTimer(this))
@@ -137,8 +137,8 @@ public:
     std::shared_ptr<SurakartaBoard> board_;
     std::shared_ptr<SurakartaGameInfo> game_info_;
     std::shared_ptr<SurakartaRuleManager> rule_manager_;
+     std::shared_ptr<SurakartaAgentMine> myAI;
 
-    //void resettime();
     bool checktimeout;
     QTimer* blackTimerId;               // 黑方定时器
     QTimer* whiteTimerId;               // 白方定时器
@@ -146,5 +146,5 @@ public:
 
 
 
-    // std::shared_ptr<SurakartaAgentBase> agent_;
+
 };

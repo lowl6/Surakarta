@@ -8,6 +8,7 @@ debug/surakarta_board.o
 debug/surakarta_game.o
 debug/surakarta_reason.o
 debug/surakarta_rule_manager.o
+debug/surakarta_agent_mine.o
 debug/widget.o
 debug/qrc_imagines.o
 debug/moc_networksocket.o
