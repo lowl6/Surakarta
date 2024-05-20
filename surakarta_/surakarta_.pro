@@ -46,7 +46,6 @@ FORMS += \
     mainbegin.ui \
     netwindow.ui \
     surakarta/surakarta_board.ui \
-    surakarta_agent/showboard.ui \
     widget.ui
 
 # Default rules for deployment.

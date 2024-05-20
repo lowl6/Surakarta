@@ -49,11 +49,12 @@ constexpr auto qt_meta_stringdata_CLASSnetwindowENDCLASS = QtMocHelpers::stringD
     "on_BlackrBtn_clicked",
     "checked",
     "on_WhiterBtn_clicked",
-    "on_applyGame_clicked"
+    "on_applyGame_clicked",
+    "on_AI_clicked"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSnetwindowENDCLASS_t {
-    uint offsetsAndSizes[24];
+    uint offsetsAndSizes[26];
     char stringdata0[10];
     char stringdata1[23];
     char stringdata2[1];
@@ -66,6 +67,7 @@ struct qt_meta_stringdata_CLASSnetwindowENDCLASS_t {
     char stringdata9[8];
     char stringdata10[21];
     char stringdata11[21];
+    char stringdata12[14];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSnetwindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -82,7 +84,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSnetwindowENDCLASS_t qt_meta_str
         QT_MOC_LITERAL(110, 20),  // "on_BlackrBtn_clicked"
         QT_MOC_LITERAL(131, 7),  // "checked"
         QT_MOC_LITERAL(139, 20),  // "on_WhiterBtn_clicked"
-        QT_MOC_LITERAL(160, 20)   // "on_applyGame_clicked"
+        QT_MOC_LITERAL(160, 20),  // "on_applyGame_clicked"
+        QT_MOC_LITERAL(181, 13)   // "on_AI_clicked"
     },
     "netwindow",
     "connected_successfully",
@@ -95,7 +98,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSnetwindowENDCLASS_t qt_meta_str
     "on_BlackrBtn_clicked",
     "checked",
     "on_WhiterBtn_clicked",
-    "on_applyGame_clicked"
+    "on_applyGame_clicked",
+    "on_AI_clicked"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -107,7 +111,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnetwindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -115,14 +119,15 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnetwindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   62,    2, 0x08,    1 /* Private */,
-       3,    0,   63,    2, 0x08,    2 /* Private */,
-       4,    0,   64,    2, 0x08,    3 /* Private */,
-       5,    0,   65,    2, 0x08,    4 /* Private */,
-       6,    1,   66,    2, 0x08,    5 /* Private */,
-       8,    1,   69,    2, 0x08,    7 /* Private */,
-      10,    1,   72,    2, 0x08,    9 /* Private */,
-      11,    0,   75,    2, 0x08,   11 /* Private */,
+       1,    0,   68,    2, 0x08,    1 /* Private */,
+       3,    0,   69,    2, 0x08,    2 /* Private */,
+       4,    0,   70,    2, 0x08,    3 /* Private */,
+       5,    0,   71,    2, 0x08,    4 /* Private */,
+       6,    1,   72,    2, 0x08,    5 /* Private */,
+       8,    1,   75,    2, 0x08,    7 /* Private */,
+      10,    1,   78,    2, 0x08,    9 /* Private */,
+      11,    0,   81,    2, 0x08,   11 /* Private */,
+      12,    0,   82,    2, 0x08,   12 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -132,6 +137,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSnetwindowENDCLASS[] = {
     QMetaType::Void, 0x80000000 | 7,    2,
     QMetaType::Void, QMetaType::Bool,    9,
     QMetaType::Void, QMetaType::Bool,    9,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -164,6 +170,8 @@ Q_CONSTINIT const QMetaObject netwindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         // method 'on_applyGame_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'on_AI_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -183,6 +191,7 @@ void netwindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 5: _t->on_BlackrBtn_clicked((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         case 6: _t->on_WhiterBtn_clicked((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         case 7: _t->on_applyGame_clicked(); break;
+        case 8: _t->on_AI_clicked(); break;
         default: ;
         }
     }
@@ -207,13 +216,13 @@ int netwindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

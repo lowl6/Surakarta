@@ -2,5 +2,34 @@
     <qresource prefix="/">
         <file>Resources/08cb3185837180b6f109f8be38121a0.jpg</file>
         <file>Resources/20240514193115.jpg</file>
+        <file>Resources/yuanshen/1.png</file>
+        <file>Resources/yuanshen/2.png</file>
+        <file>Resources/yuanshen/3.png</file>
+        <file>Resources/yuanshen/4.png</file>
+        <file>Resources/yuanshen/5.png</file>
+        <file>Resources/yuanshen/6.png</file>
+        <file>Resources/yuanshen/7.png</file>
+        <file>Resources/yuanshen/8.png</file>
+        <file>Resources/yuanshen/9.png</file>
+        <file>Resources/yuanshen/10.png</file>
+        <file>Resources/yuanshen/11.png</file>
+        <file>Resources/yuanshen/12.png</file>
+        <file>Resources/yuanshen/13.png</file>
+        <file>Resources/yuanshen/14.png</file>
+        <file>Resources/yuanshen/15.png</file>
+        <file>Resources/yuanshen/16.png</file>
+        <file>Resources/yuanshen/17.png</file>
+        <file>Resources/yuanshen/18.png</file>
+        <file>Resources/yuanshen/19.png</file>
+        <file>Resources/yuanshen/20.png</file>
+        <file>Resources/yuanshen/21.png</file>
+        <file>Resources/yuanshen/22.png</file>
+        <file>Resources/yuanshen/23.png</file>
+        <file>Resources/yuanshen/24.png</file>
+        <file>Resources/yuanshen/25.png</file>
+        <file>Resources/yuanshen/26.png</file>
+        <file>Resources/yuanshen/27.png</file>
+        <file>Resources/yuanshen/28.png</file>
+        <file>Resources/yuanshen/29.png</file>
     </qresource>
 </RCC>

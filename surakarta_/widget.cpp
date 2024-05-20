@@ -281,3 +281,5 @@ void Widget::on_AI_clicked()
     update();
 }
 
+
+

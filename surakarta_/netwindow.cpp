@@ -22,7 +22,6 @@ netwindow::netwindow(Widget *parent)
         disconnectFromServer();
         ui->groupBox->hide();
     });
-
     connect(socket->base(), &QTcpSocket::connected, this, &netwindow::connected_successfully);
     connect(ui->connect_button, &QPushButton::clicked, this, &netwindow::connectToServer);
     connect(ui->disconnect_button, &QPushButton::clicked, this, &netwindow::disconnectFromServer);
@@ -34,7 +33,30 @@ netwindow::~netwindow()
 {
     delete ui;
 }
+void netwindow::on_AI_clicked()
+{
 
+    if(!AIcan)
+    {
+        return;
+    }
+    if(!have_connected)
+    {
+        QMessageBox msg;
+        msg.setText("请先连接到服务器 ？_？");
+        msg.exec();
+        return;
+    }
+    SurakartaMove move=game->myAI->CalculateMove();
+    game->Move(move);
+    QString s_from=board->pos2Qsting(move.from);
+    QString s_to=board->pos2Qsting(move.to);
+    socket->send(NetworkData(OPCODE::MOVE_OP, s_from,s_to, ""));
+    AIcan=true;
+    AIcan=false;
+    board->selectId = -1;
+    update();
+}
 void netwindow::connected_successfully() {
     have_connected=true;
     ui->connect_button->setEnabled(false);
@@ -103,6 +125,7 @@ void netwindow::receiveMessage(NetworkData data) {
 //各种op的实现
 void netwindow::move_op(NetworkData data)
 {
+    AIcan=true;
     SurakartaPosition from=board->Qsting2pos(data.data1);
     SurakartaPosition to=board->Qsting2pos(data.data2);
     SurakartaMove move(from, to, game->game_info_->current_player_);
@@ -240,6 +263,7 @@ void netwindow::mouseReleaseEvent(QMouseEvent *ev)
                 QString s_from=board->pos2Qsting(from);
                 QString s_to=board->pos2Qsting(to);
                 socket->send(NetworkData(OPCODE::MOVE_OP, s_from,s_to, ""));
+                AIcan=true;
             }
             ui->send_edit->clear();
             board->selectId = -1;
@@ -251,9 +275,11 @@ void netwindow::mouseReleaseEvent(QMouseEvent *ev)
 
 void netwindow::on_BlackrBtn_clicked(bool checked)
 {
+
     if(checked)
     {
         game->game_info_->player=SurakartaPlayer::BLACK;
+           AIcan=true;
     }
     else
        game->game_info_->player=SurakartaPlayer::WHITE;
@@ -264,7 +290,9 @@ void netwindow::on_WhiterBtn_clicked(bool checked)
 {
 
     if(checked)
-        game->game_info_->player=SurakartaPlayer::WHITE;
+    {game->game_info_->player=SurakartaPlayer::WHITE;
+        AIcan=false;
+    }
     else
         game->game_info_->player=SurakartaPlayer::BLACK;
 }

@@ -36,6 +36,7 @@ private:
     void reject_op(NetworkData data);
     void end_op(NetworkData data);
     void chat_op(NetworkData data);
+    bool AIcan;
     Widget *parent;
 private slots:
     void connected_successfully();
@@ -44,8 +45,9 @@ private slots:
     void sendMessage();
     void receiveMessage(NetworkData);
     void on_BlackrBtn_clicked(bool checked);
-    void on_WhiterBtn_clicked(bool checked);
-    void on_applyGame_clicked();
+    void on_WhiterBtn_clicked(bool checked) ;
+    void on_applyGame_clicked() ;
+    void on_AI_clicked() override;
 };
 
 #endif // NETWINDOW_H

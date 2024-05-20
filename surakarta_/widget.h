@@ -33,12 +33,13 @@ public:
     void Hide();
 private:
     Ui::Widget *ui;
+
    // void hidentb();
 public slots:
    virtual void on_restart_clicked();
    virtual void on_admit_defeat_clicked();
 
    private slots:
-   void on_AI_clicked();
+   virtual void on_AI_clicked();
 };
 #endif // WIDGET_H
