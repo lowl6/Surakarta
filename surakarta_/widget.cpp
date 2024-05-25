@@ -245,13 +245,10 @@ void Widget::paintEvent(QPaintEvent *event)
 void Widget::on_restart_clicked()
 {
     this->hide();
-
     // 删除当前 Widget 对象
     delete this;
-
     // 创建一个新的 Widget 对象
     Widget *newWidget = new Widget();
-
     // 显示新创建的 Widget
     newWidget->show();
 }

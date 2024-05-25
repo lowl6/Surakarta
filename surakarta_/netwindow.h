@@ -1,7 +1,6 @@
 #ifndef NETWINDOW_H
 #define NETWINDOW_H
 #include "widget.h"
-#include "ui_widget.h"
 #include "NetworkLibrary/networkdata.h"
 #include "NetworkLibrary/networksocket.h"
 #include <QWidget>

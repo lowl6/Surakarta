@@ -44,6 +44,7 @@ public:
     QRadioButton *BlackrBtn;
     QRadioButton *WhiterBtn;
     QPushButton *applyGame;
+    QRadioButton *ALL_AI;
 
     void setupUi(QWidget *netwindow)
     {
@@ -142,6 +143,9 @@ public:
 
         verticalLayout->addWidget(applyGame);
 
+        ALL_AI = new QRadioButton(netwindow);
+        ALL_AI->setObjectName("ALL_AI");
+        ALL_AI->setGeometry(QRect(590, 360, 181, 25));
 
         retranslateUi(netwindow);
 
@@ -163,6 +167,7 @@ public:
         BlackrBtn->setText(QCoreApplication::translate("netwindow", "\346\211\247\351\273\221\345\205\210\350\241\214", nullptr));
         WhiterBtn->setText(QCoreApplication::translate("netwindow", "\346\211\247\347\231\275\345\220\216\350\241\214", nullptr));
         applyGame->setText(QCoreApplication::translate("netwindow", "\347\224\263\350\257\267\345\257\271\345\261\200", nullptr));
+        ALL_AI->setText(QCoreApplication::translate("netwindow", "AI\346\211\230\347\256\241", nullptr));
     } // retranslateUi
 
 };

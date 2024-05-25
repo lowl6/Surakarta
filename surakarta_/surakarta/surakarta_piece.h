@@ -41,7 +41,7 @@ inline std::ostream& operator<<(std::ostream& os, const PieceColor& color) {
 struct SurakartaPosition {
     int x;
     int y;
-    SurakartaPosition(unsigned int x = 0, unsigned int y = 0)
+    SurakartaPosition(int x = 0,  int y = 0)
         : x(x), y(y) {}
     friend std::ostream& operator<<(std::ostream& os, const SurakartaPosition& pos) {
         os << "(" << pos.x << ", " << pos.y << ")";
@@ -60,7 +60,7 @@ public:
     SurakartaPiece()
         : position_({0, 0}), color_(PieceColor::NONE) {}
 
-    SurakartaPiece(unsigned int x, unsigned int y, PieceColor color)
+    SurakartaPiece( int x,  int y, PieceColor color)
         : position_({x, y}), color_(color) {}
 
     SurakartaPiece(SurakartaPosition position, PieceColor color)

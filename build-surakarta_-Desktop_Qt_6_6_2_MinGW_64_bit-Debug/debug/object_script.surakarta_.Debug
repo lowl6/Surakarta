@@ -1,4 +1,3 @@
-debug/client.o
 debug/networkdata.o
 debug/networksocket.o
 debug/main.o

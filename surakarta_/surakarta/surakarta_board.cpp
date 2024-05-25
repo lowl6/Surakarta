@@ -3,6 +3,8 @@
 SurakartaBoard::SurakartaBoard(unsigned int boardsize)
     :boardSize(boardsize)
 {
+    piece.clear();
+    piece.resize(24);
     selectId=-1;
     isBlackTurn=true;
     int i=0;
@@ -61,6 +63,8 @@ void SurakartaBoard:: reset()
     // winner_ = SurakartaPlayer::NONE;
     selectId=-1;
     isBlackTurn=true;
+    piece.clear();
+    piece.resize(24);
     int i=0;
     for (unsigned int y = 0; y < BOARD_SIZE; y++) {
         for (unsigned int x = 0; x < BOARD_SIZE; x++) {

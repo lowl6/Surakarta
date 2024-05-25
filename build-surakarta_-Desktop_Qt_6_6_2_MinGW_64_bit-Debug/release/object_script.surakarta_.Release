@@ -1,4 +1,3 @@
-release/client.o
 release/networkdata.o
 release/networksocket.o
 release/main.o

@@ -22,6 +22,7 @@ netwindow::netwindow(Widget *parent)
         disconnectFromServer();
         ui->groupBox->hide();
     });
+
     connect(socket->base(), &QTcpSocket::connected, this, &netwindow::connected_successfully);
     connect(ui->connect_button, &QPushButton::clicked, this, &netwindow::connectToServer);
     connect(ui->disconnect_button, &QPushButton::clicked, this, &netwindow::disconnectFromServer);
@@ -52,10 +53,11 @@ void netwindow::on_AI_clicked()
     QString s_from=board->pos2Qsting(move.from);
     QString s_to=board->pos2Qsting(move.to);
     socket->send(NetworkData(OPCODE::MOVE_OP, s_from,s_to, ""));
-    AIcan=true;
+    ui->receive_edit->clear();
     AIcan=false;
     board->selectId = -1;
     update();
+    return;
 }
 void netwindow::connected_successfully() {
     have_connected=true;
@@ -126,16 +128,20 @@ void netwindow::receiveMessage(NetworkData data) {
 void netwindow::move_op(NetworkData data)
 {
     AIcan=true;
+
     SurakartaPosition from=board->Qsting2pos(data.data1);
     SurakartaPosition to=board->Qsting2pos(data.data2);
     SurakartaMove move(from, to, game->game_info_->current_player_);
     game->Move(move);
     ui->receive_edit->clear();
     update();
+    if(ui->ALL_AI->isChecked())
+    {
+        on_AI_clicked();
+    }
 }
 void netwindow::ready_op(NetworkData data)
 {
-    std::cout<<"ready!!!!";
     ui->opponenter_name->setText(data.data1);
     ui->room->setText(data.data3);
     ui->BlackrBtn->setEnabled(false);
@@ -150,7 +156,11 @@ void netwindow::ready_op(NetworkData data)
         emit ui->WhiterBtn->clicked(true);
         msg.information(this, tr("开始了！"), tr("你执白后行！"));
     }
-
+    if(ui->ALL_AI->isChecked()&&AIcan)
+    {
+        on_AI_clicked();
+        return;
+    }
 }
 void netwindow::reject_op(NetworkData data)
 {
@@ -158,7 +168,7 @@ void netwindow::reject_op(NetworkData data)
 }
 void netwindow::end_op(NetworkData data)
 {
-    msg.information(this,tr("对局结束"),tr("EndReason:").arg(data.data2));
+    msg.information(this,tr("对局结束"),tr("game end").arg(data.data2));
     board->reset();
     ui->BlackrBtn->setEnabled(true);
     ui->WhiterBtn->setEnabled(true);

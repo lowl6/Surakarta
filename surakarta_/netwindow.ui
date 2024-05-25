@@ -234,6 +234,19 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QRadioButton" name="ALL_AI">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>360</y>
+     <width>181</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>AI托管</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
