@@ -4,7 +4,7 @@
 #include <QImage>
 #include <QString>
 #include "netwindow.h"
-
+//开始界面
 namespace Ui {
 class mainbegin;
 }
@@ -16,7 +16,7 @@ class mainbegin : public QDialog
 public:
     explicit mainbegin(QWidget *parent = nullptr);
     ~mainbegin();
-    QImage imgopena[29];//开场动画
+   // QImage imgopena[29];//开场动画
 // private:
 //     QLabel *imageLabel;
 //     QTimer *timer;

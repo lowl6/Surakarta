@@ -122,12 +122,12 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
             }
         }
         // 寻找通路：Accessible_xRoad, Accessible_yRoad;
-        std::vector<unsigned int> Accessible_xRoad, Accessible_yRoad;
-        for (unsigned i = 1; i <= 4; i++) {
+        std::vector<int> Accessible_xRoad, Accessible_yRoad;
+        for (int i = 1; i <= 4; i++) {
             int cnt = 0;
             int f1 = 0;
             int f2 = 0;
-            for (unsigned j = 0; j < BOARD_SIZE; j++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
                 if (i == move.from.x && j == move.from.y) {
                     f1 = 1;
                     continue;
@@ -145,11 +145,11 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
                 Accessible_xRoad.push_back(i);
             }
         }
-        for (unsigned i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             int cnt = 0;
             int f1 = 0;
             int f2 = 0;
-            for (unsigned j = 0; j < BOARD_SIZE; j++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
                 if (i == move.from.y && j == move.from.x) {
                     f1 = 1;
                     continue;
@@ -312,7 +312,7 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
 
         // 对to寻找interface
         if (!(move.to.y == 0 || move.to.y == BOARD_SIZE - 1)) {
-            unsigned int i = move.to.x;
+             int i = move.to.x;
             while (1) {
                 if (i == BOARD_SIZE - 1) {
                     SurakartaPosition newPosition(i, move.to.y);
@@ -354,7 +354,7 @@ SurakartaIllegalMoveReason SurakartaRuleManager::JudgeMove(const SurakartaMove& 
             }
         }
         if (!(move.to.x == 0 || move.to.x == BOARD_SIZE - 1)) {
-            unsigned int i = move.to.y;
+             int i = move.to.y;
             while (1) {
                 if (i == BOARD_SIZE - 1) {
                     SurakartaPosition newPosition(move.to.x, i);
@@ -455,8 +455,8 @@ std::pair<SurakartaEndReason, SurakartaPlayer> SurakartaRuleManager::JudgeEnd(co
     // if(game_info_->num_round_==12) return std::make_pair(SurakartaEndReason::STALEMATE, SurakartaPlayer::NONE);
     // if(game_info_->num_round_==99) return std::make_pair(SurakartaEndReason::NONE, SurakartaPlayer::NONE);
 
-    for (unsigned int i = 0; i < board_size_; i++) {
-        for (unsigned int j = 0; j < board_size_; j++) {
+    for ( int i = 0; i < board_size_; i++) {
+        for ( int j = 0; j < board_size_; j++) {
             int pieceID=(*board_).getPiecesID(i,j);
             if(pieceID==-1)
                 continue;
@@ -509,8 +509,8 @@ std::vector<SurakartaPosition> SurakartaRuleManager::GetAllLegalTarget(const Sur
     std::vector<SurakartaPosition> AllLegalTarget, current_player_, last_player_;
     possible_steps_tmp.player=game_info_->current_player_;
     //获取所棋子的位置
-    for (unsigned int i = 0; i < board_size_; i++) {
-        for (unsigned int j = 0; j < board_size_; j++) {
+    for ( int i = 0; i < board_size_; i++) {
+        for ( int j = 0; j < board_size_; j++) {
             SurakartaPosition position = {i, j};
             int pieceID=(*board_).getPiecesID(i,j);
             if(pieceID<24&&pieceID>=0)

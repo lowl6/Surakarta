@@ -2,6 +2,7 @@
 #include "../surakarta/surakarta_common.h"
 #include "../surakarta/surakarta_rule_manager.h"
 #include "../surakarta/global_random_generator.h"
+//AI
 class SurakartaAgentMine {
    public:
     SurakartaAgentMine(std::shared_ptr<SurakartaBoard> board,

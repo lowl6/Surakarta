@@ -9,7 +9,7 @@ struct SurakartaMove {
     SurakartaPlayer player;
     SurakartaMove()
         : from(0, 0), to(0, 0), player(SurakartaPlayer::NONE) {}
-    SurakartaMove(unsigned int from_x, unsigned int from_y, unsigned int to_x, unsigned int to_y, SurakartaPlayer player)
+    SurakartaMove( int from_x,  int from_y,  int to_x,  int to_y, SurakartaPlayer player)
         : from(from_x, from_y), to(to_x, to_y), player(player) {}
     SurakartaMove(SurakartaPosition from, SurakartaPosition to, SurakartaPlayer player)
         : from(from), to(to), player(player) {}

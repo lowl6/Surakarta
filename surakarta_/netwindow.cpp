@@ -13,7 +13,7 @@ netwindow::netwindow(Widget *parent)
     ui->receive_edit->setReadOnly(true);
     ui->BlackrBtn->setChecked(true);
     ui->groupBox->hide();
-   // Hide();
+    ui->ALL_AI->setChecked(true);
     socket = new NetworkSocket(new QTcpSocket(this), this);
 
     connect(socket->base(), &QAbstractSocket::disconnected,this, [=]() {
@@ -139,23 +139,30 @@ void netwindow::move_op(NetworkData data)
     {
         on_AI_clicked();
     }
+    QFile file(".\\record\\client\\Team_5.txt");
+    if (file.open(QIODevice::WriteOnly)) {
+        QTextStream out(&file);
+        out << data.data1 << "-" << data.data2 << " " ;
+        file.close();
+    }
 }
+
 void netwindow::ready_op(NetworkData data)
 {
     ui->opponenter_name->setText(data.data1);
     ui->room->setText(data.data3);
     ui->BlackrBtn->setEnabled(false);
     ui->WhiterBtn->setEnabled(false);
-    if(data.data2=='0')
+    if(data.data2=="BLACK")
     {
         emit ui->BlackrBtn->clicked(true);
         msg.information(this, tr("开始了！"), tr("你执黑先行！"));
     }
     else
-    {
-        emit ui->WhiterBtn->clicked(true);
-        msg.information(this, tr("开始了！"), tr("你执白后行！"));
-    }
+     {
+         emit ui->WhiterBtn->clicked(true);
+         //msg.information(this, tr("开始了！"), tr("你执白后行！"));
+     }
     if(ui->ALL_AI->isChecked()&&AIcan)
     {
         on_AI_clicked();
@@ -173,6 +180,17 @@ void netwindow::end_op(NetworkData data)
     ui->BlackrBtn->setEnabled(true);
     ui->WhiterBtn->setEnabled(true);
     update();
+    QFile file(".\\record\\client\\Team_5.txt");
+    if (file.open(QIODevice::WriteOnly)) {
+        QTextStream out(&file);
+        out << data.data1 << "-" << data.data2 << " " ;
+        if(data.data2 == "1") out<<"S#";
+        else if(data.data2 == "2") out<<"C#";
+        else if(data.data2 == "4") out <<"R#";
+        else if(data.data2 == "5") out << "T#";
+        else if(data.data2 == "6") out << "I#";
+        file.close();
+    }
 }
 void netwindow::chat_op(NetworkData data)
 {
@@ -264,7 +282,7 @@ void netwindow::mouseReleaseEvent(QMouseEvent *ev)
 
             SurakartaPosition from(board->piece[board->selectId].position_.x, board->piece[board->selectId].position_.y);
             SurakartaPosition to(row, col);
-            SurakartaMove move(from, to, game->game_info_->current_player_);                       
+            SurakartaMove move(from, to, game->game_info_->current_player_);
             SurakartaMoveResponse response= game->Move(move);
             if(!response.IsLegal())
                 return;

@@ -6,7 +6,7 @@
 #include<QPainter>
 #include<QMouseEvent>
 #include "surakarta/surakarta_game.h"
-
+//单人模式界面
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Widget;
@@ -22,13 +22,12 @@ public:
     std::shared_ptr<SurakartaBoard> board=game->board_;
     inline QPoint center(unsigned int row,unsigned int col);//输入行列坐标 返回像素坐标
     inline QPoint center(int id);  // //输入棋子的id 返回像素坐标
-    bool getRowCol(QPoint pt,int&row,int&col);
-    void drawPiece(QPainter & painter, int id);
+    bool getRowCol(QPoint pt,int&row,int&col);//获得点上棋子的坐标
+    void drawPiece(QPainter & painter, int id);//画棋子
     void paintEvent(QPaintEvent *); //与显示到窗口中有关的函数
     virtual void mouseReleaseEvent(QMouseEvent*ev);
-    void toSelectPieces(int id);
+    void toSelectPieces(int id);//
     bool canSelect(int id);
-    void repaintEvent(QPaintEvent *);
     ~Widget();
     void Hide();
 private:
@@ -36,10 +35,10 @@ private:
 
    // void hidentb();
 public slots:
-   virtual void on_restart_clicked();
-   virtual void on_admit_defeat_clicked();
+   virtual void on_restart_clicked();//重新开始游戏
+   virtual void on_admit_defeat_clicked();//认输并重开
 
    private slots:
-   virtual void on_AI_clicked();
+   virtual void on_AI_clicked();//手动代打
 };
 #endif // WIDGET_H

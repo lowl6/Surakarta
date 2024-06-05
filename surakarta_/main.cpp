@@ -5,8 +5,8 @@
 #include "mainbegin.h"
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
     mainbegin begin;
     begin.show();
-    return a.exec();
-}//进入widget.h文件里面，自动调用了构造函数
+    return app.exec();
+}//进入widget.h文件里面，自动调用了构造函数？？

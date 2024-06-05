@@ -51,7 +51,7 @@ public:
 
     //    protected:
     //SurakartaGame game_;
-    unsigned int board_size_;
+     int board_size_;
     std::shared_ptr<const SurakartaBoard> board_;
     std::shared_ptr<const SurakartaGameInfo> game_info_;
     //std::shared_ptr<const SurakartaGame> game_;
